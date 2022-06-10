@@ -1,0 +1,1 @@
+folder ini dugunakan untuk page-page yang berhubungan dengan recruiter

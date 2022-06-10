@@ -1,0 +1,1 @@
+gambar simpan di folder ini supaya bisa di akses public oleh src
