@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Image.module.css'
 
-const Image = ({source, style}) => {
+const JobSeekerAva = ({source, style}) => {
   return (
     <div style={style}>
         <img 
@@ -13,4 +13,4 @@ const Image = ({source, style}) => {
   )
 }
 
-export default Image
+export default JobSeekerAva

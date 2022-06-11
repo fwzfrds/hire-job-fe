@@ -1,0 +1,14 @@
+.logo-container {
+    display: inline-block;
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .logo-container {
+        width: 100px !important;
+    }    
+}
