@@ -1,0 +1,130 @@
+.cover-image {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: purple;
+    object-fit: cover;
+}
+
+.cover-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-card {
+    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0 solid transparent;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+}
+
+.profile-image {
+    width: 55%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.profile-image img {
+    width: 100%;
+}
+
+.edit {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: #9EA0A5;
+    margin-bottom: 25px;
+    margin-left: -10px;
+}
+
+.company {
+    align-self: flex-start;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.company:nth-of-type(2) {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    color: #9EA0A5;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.edit-form {
+    width: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    border: 0 solid transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+}
+
+.title {
+    color: #1F2A36;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 25px 30px 20px;
+}
+
+.hl {
+    width: 100%;
+    border-bottom: 1px solid #9EA0A5;
+}
+
+.inputs {
+    padding: 25px 30px 20px;
+}
+
+.inputs p {
+    color: #9EA0A5;
+    padding-left: 5px;
+}
+
+.input-field {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #E2E5ED;
+    border-radius: 5px;
+    margin-top: -10px;
+    padding-left: 10px;
+}
+
+.save-button {
+    width: 100%;
+    height: 45px;
+    background-color: #5E50A1;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.cancel-button {
+    width: 100%;
+    height: 45px;
+    background-color: #FFFFFF;
+    color: #5E50A1;
+    border: 1px solid #5E50A1;
+    border-radius: 4px;
+}
