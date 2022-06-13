@@ -1,0 +1,156 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background: rgba(246, 247, 248, 1);
+    min-height: 100vh;
+    /* width: 100% !important; */
+}
+
+.login-form {
+    max-width: 570px;
+}
+
+.greeting {
+    display: block;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 44px;
+    color: #1F2A36;
+    margin: 0;
+}
+
+.text {
+    /* width: 570px; */
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    color: #46505C;
+    margin: 0;
+    margin-top: 16px;
+}
+
+.input-form {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-container label {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #9EA0A5;
+}
+
+.input-container input {
+    /* width: 570px; */
+    height: 50px;
+    background: #FFFFFF;
+    border: 1px solid #E2E5ED;
+    border-radius: 4px;
+    padding-left: 15px;
+}
+
+.input-container input::placeholder {
+    font-size: 14px;
+    line-height: 19px;
+    color: #858D96;
+}
+
+.register-button {
+    height: 50px;
+    background: #FBB017;
+    border-radius: 4px;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+}
+
+.input-form p {
+    text-align: center;
+    font-size: 16px;
+}
+
+.input-form .signup-here {
+    color: #FBB017;
+    text-decoration: none;
+}
+
+.input-form .signup-here:hover {
+    text-decoration: underline;
+}
+
+.greeting-mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .login-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .login-form {
+        width: 100% !important;   
+        /* margin-bottom: 50px; */
+    }
+
+    
+    .greeting-mobile {
+        display: block;
+    }
+    
+    .greeting {
+        display: none;
+    }
+    
+    .title {
+        font-size: 22px;
+    }
+    
+    .text {
+        margin-top: 0px;
+        font-size: 14px;
+    }
+    
+    .input-form {
+        margin-top: 20px;
+        gap: 15px;
+    }
+
+    .input-container label {
+        font-size: 12px;
+    }
+
+    .input-container input {
+        /* width: 570px; */
+        height: 35px;
+        padding-left: 10px;
+    }
+    
+    .input-container input::placeholder {
+        font-size: 12px;
+    }
+
+    .register-button {
+        height: 35px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    
+}
