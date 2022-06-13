@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Logo from '../../base/logo/Logo'
 import styles from './Footer.module.css'
 import { Link } from 'react-router-dom'
@@ -11,11 +11,7 @@ const Footer = () => {
                 <Logo
                     colorLogo={'white'}
                     style={{
-                        width: 178,
-                        '@media only screen and (max-width: 600px)': {
-                            // display: 'none',
-                            width: 100
-                        }
+                        width: `${window.innerWidth > 600 ? 178 : 100}px`
                     }}
                 />
                 <p className={`${styles.text}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>

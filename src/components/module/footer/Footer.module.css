@@ -1,9 +1,10 @@
 .footer {
-    width: 100vw;
+    width: 100%;
     background: rgba(94, 80, 161, 1);
-    position: fixed;
-    bottom: 0px;
+    /* position: sticky;
+    bottom: 0px; */
     height: max-content;
+    margin-top: 50px;
 }
 
 .footer-container {
