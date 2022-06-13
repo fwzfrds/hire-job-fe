@@ -63,7 +63,7 @@ const RegisterJobseeker = () => {
             <input type="password" id='confirm' placeholder='Masukkan konfirmasi kata sandi'/>
           </div>
           <button className={`${styles['register-button']}`}>Daftar</button>
-          <p>Anda sudah punya akun? <Link to='/jobseeker/login' className={`${styles['signup-here']}`}>Masuk disini</Link></p>
+          <p>Anda sudah punya akun? <Link to='/recruiter/login' className={`${styles['signup-here']}`}>Masuk disini</Link></p>
         </form>
       </div>
     </div>
