@@ -1,0 +1,8 @@
+.logo-container {
+    display: inline-block;
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+}

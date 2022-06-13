@@ -1,0 +1,15 @@
+.socmed-info {
+    display: flex;
+    width: fit-content;
+    gap: 20px;
+    text-decoration: none;
+}
+
+.socmed-info img {
+    align-self: center;
+}
+
+.socmed-info p {
+    color:rgba(158, 160, 165, 1);
+    font-size: 14px;
+}
