@@ -23,7 +23,7 @@ const Main = () => {
                 minHeight: '100vh'
              }}
         >
-            <Link to='#'>Company</Link>
+            <Link to='/recruiter/login'>Company</Link>
             <Link to='/jobseeker/login'>Jobseeker</Link>
         </div>
     )
