@@ -43,9 +43,9 @@ const LoginRecruiter
             <label htmlFor="">Kata Sandi</label>
             <input type="password" placeholder='Masukkan kata sandi'/>
           </div>
-          <Link to='#' className={`${styles['forgot-password']}`}>Lupa kata sandi?</Link>
+          <Link to='/recruiter/reset-password' className={`${styles['forgot-password']}`}>Lupa kata sandi?</Link>
           <button className={`${styles['login-button']}`}>Masuk</button>
-          <p>Anda belum punya akun? <Link to='/jobseeker/register' className={`${styles['signup-here']}`}>Daftar disini</Link></p>
+          <p>Anda belum punya akun? <Link to='/recruiter/register' className={`${styles['signup-here']}`}>Daftar disini</Link></p>
         </form>
       </div>
     </div>
