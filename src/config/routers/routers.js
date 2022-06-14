@@ -9,6 +9,10 @@ import LoginRecruiter from '../../pages/recruiter/login/LoginRecruiter'
 import HomeRecruiter from '../../pages/recruiter/home/HomeRecruiter'
 import ResetPassJobseeker from '../../pages/jobseeker/resetPassword/ResetPassJobseeker'
 import ResetPassRecruiter from '../../pages/recruiter/resetPassword/ResetPassRecruiter'
+import ProfileJobseeker from '../../pages/jobseeker/profile/ProfileJobseeker'
+import Portfolio from '../../components/module/portfolio/Portfolio'
+import Experience from '../../components/module/experience/Experience'
+import EditProfJobseeker from '../../pages/jobseeker/editProfile/EditProfJobseeker'
 
 
 const Routers = () => {
@@ -19,6 +23,11 @@ const Routers = () => {
         <Route path="/jobseeker/register" element={<RegisterJobseeker />} />
         <Route path="/recruiter/register" element={<RegisterRecruiter />} />
         <Route path="/jobseeker/login" element={<LoginJobSeeker />} />
+        <Route path="/jobseeker/edit/:id" element={<EditProfJobseeker/>} />
+        <Route path="/recruiter/jobseeker-profile/:id" element={<ProfileJobseeker />}>
+          <Route path="portfolio" element={<Portfolio />} />
+          <Route path="experience" element={<Experience />} />
+        </Route>
         <Route path="/jobseeker/reset-password" element={<ResetPassJobseeker />} />
         <Route path="/recruiter/login" element={<LoginRecruiter />} />
         <Route path="/recruiter/home" element={<HomeRecruiter />} />

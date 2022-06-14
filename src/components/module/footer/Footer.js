@@ -15,7 +15,11 @@ const Footer = () => {
                     }}
                 />
                 <p className={`${styles.text}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
-                <hr />
+                <hr 
+                    style={{ 
+                        color: 'white'
+                     }}
+                />
                 <div className={`${styles['footer-info']}`}>
                     <p className={`${styles.copyright}`}>2022 Peworld. All right reserved</p>
                     <div className={`${styles['footer-contact']}`}>
