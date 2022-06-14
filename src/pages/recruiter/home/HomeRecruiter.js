@@ -4,6 +4,7 @@ import Footer from '../../../components/module/footer/Footer'
 import styles from './HomeRecruiter.module.css'
 import { getUser } from '../../../config/redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../../../components/base/loading/Loading'
 
 const HomeRecruiter = () => {
 
@@ -16,6 +17,7 @@ const HomeRecruiter = () => {
     }, [])
 
     console.log(users)
+    console.log(isLoading)
 
     return (
         <div className={`${styles['home-container']}`}>
@@ -41,12 +43,14 @@ const HomeRecruiter = () => {
                 </div>
             </div>
             <div className={`${styles['cards-container']}`}>
-                {users.map(user => {
+                {isLoading === true ? <Loading /> : users.map(user => {
                     return (
-                        <Card 
-                            location={user.address.city}
-                            name={user.name}
-                        />
+                        <React.Fragment>
+                            <Card
+                                location={user.address.city}
+                                name={user.name}
+                            />
+                        </React.Fragment>
                     )
                 })}
                 {/* <Card />
@@ -54,6 +58,7 @@ const HomeRecruiter = () => {
                 <Card />
                 <Card /> */}
             </div>
+            {/* <Loading /> */}
 
 
             <Footer />
