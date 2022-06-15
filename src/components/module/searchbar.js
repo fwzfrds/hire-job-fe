@@ -9,7 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import searchImg from './search.png'
 
-const Searchbar = () => {
+const Searchbar = ({onChange, onClick}) => {
   return (
     <div 
     className='container' 
@@ -28,7 +28,7 @@ const Searchbar = () => {
         type='text'
         className={styles.search}
         placeholder='Search for any skill'
-        onChange=''
+        onChange={onChange}
         />
         <div className={styles.searchImg}>
             <img src={searchImg} alt='search'/>
@@ -38,7 +38,7 @@ const Searchbar = () => {
         <Button
         type='submit'
         className={styles['search-button']}
-        onClick=''
+        onClick={onClick}
         value=''
         title='Search'
         />

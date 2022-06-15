@@ -7,7 +7,7 @@ const Card = ({img, name, location}) => {
   return (
     <div className={`${styles['card-container']}`}>
         <JobSeekerAva
-            source={'/assets/img/abramov.jpg'}
+            source={img ? img : 'https://fakeimg.pl/300/?text=Photo'}
             style={{ 
                 width: 100,
                 height: 100,

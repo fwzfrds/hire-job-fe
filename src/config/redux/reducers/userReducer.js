@@ -24,6 +24,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false
             }
+
         case 'REGIS_USER_PENDING':
             return {
                 ...state,
@@ -32,7 +33,7 @@ const userReducer = (state = initialState, action) => {
         case 'REGIS_USER_SUCCESS':
             return {
                 ...state,
-                users: action.payload,
+                // users: action.payload,
                 isLoading: false
             }
         case 'REGIS_USER_ERROR':
@@ -40,6 +41,7 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false
             }
+
         case 'LOGIN_USER_PENDING':
             return {
                 ...state,

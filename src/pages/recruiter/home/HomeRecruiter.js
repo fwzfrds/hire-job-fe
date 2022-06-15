@@ -10,16 +10,16 @@ import Searchbar from '../../../components/module/searchbar'
 
 const HomeRecruiter = () => {
 
-    // const dispatch = useDispatch()
-    // const { isLoading, users } = useSelector((state) => state.users)
+    const dispatch = useDispatch()
+    const { isLoading, users } = useSelector((state) => state.users)
 
-    // useEffect(() => {
-    //     console.log(users)
-    //     dispatch(getUser())
-    // }, [])
+    useEffect(() => {
+        console.log(users)
+        dispatch(getUser())
+    }, [])
 
-    // console.log(users)
-    // console.log(isLoading)
+    console.log(users)
+    console.log(isLoading)
 
     return (
         <div className={`${styles['home-container']}`}>
@@ -47,20 +47,21 @@ const HomeRecruiter = () => {
             </div> */}
             <Searchbar />
             <div className={`${styles['cards-container']}`}>
-                {/* {isLoading === true ? <Loading /> : users.map(user => {
+                {isLoading === true ? <Loading /> : users.data.map(user => {
                     return (
-                        <React.Fragment>
+                        <React.Fragment key={user.id}>
                             <Card
-                                location={user.address.city}
-                                name={user.name}
+                                location={user.address ? user.address : 'Indonesia'}
+                                name={user.full_name}
+                                img={user.photo}
                             />
                         </React.Fragment>
                     )
-                })} */}
+                })}
+                {/* <Card />
                 <Card />
                 <Card />
-                <Card />
-                <Card />
+                <Card /> */}
             </div>
             {/* <Loading /> */}
             <div
@@ -68,13 +69,19 @@ const HomeRecruiter = () => {
                     marginLeft: 100,
                  }}
             >
-            {new Array(3).fill().map((item, index) =>
+            {new Array(users.pagination.totalPage).fill().map((item, index) =>
                         <button
                             // onClick={() => handlePage(index + 1)}
                             // text={index + 1}
-                            // key={index}
+                            key={index}
                             style={{ 
                                 marginRight: 20,
+                                border: 'none',
+                                borderRadius: 5,
+                                background: '#5E50A1',
+                                padding: 10,
+                                color: '#FFF',
+                                fontWeight: 600
                              }}
                         >
                             {index + 1}

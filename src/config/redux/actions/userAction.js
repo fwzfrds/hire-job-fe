@@ -4,7 +4,8 @@ import swal from 'sweetalert';
 export const getUser = () => async (dispatch) => {
     try {
         dispatch({ type: 'GET_USER_PENDING' })
-        const result = await axios.get(`https://jsonplaceholder.typicode.com/users`)
+        console.log(process.env.REACT_APP_API_BACKEND)
+        const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/getuser`)
         console.log(result.data)
         const users = result.data
 
@@ -47,9 +48,9 @@ export const register = (data) => async (dispatch) => {
         // const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/products?sortby=price&sortorder=desc&page=1&limit=10`)
         // console.log(resultGet.data.data)
 
-        const users = result.data
+        // const users = result.data
 
-        dispatch({ type: 'REGIS_USER_SUCCESS', payload: users })
+        dispatch({ type: 'REGIS_USER_SUCCESS'})
 
     } catch (error) {
         console.log(error);
