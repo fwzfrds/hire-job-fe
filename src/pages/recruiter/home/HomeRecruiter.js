@@ -8,16 +8,16 @@ import Loading from '../../../components/base/loading/Loading'
 
 const HomeRecruiter = () => {
 
-    const dispatch = useDispatch()
-    const { isLoading, users } = useSelector((state) => state.users)
+    // const dispatch = useDispatch()
+    // const { isLoading, users } = useSelector((state) => state.users)
 
-    useEffect(() => {
-        console.log(users)
-        dispatch(getUser())
-    }, [])
+    // useEffect(() => {
+    //     console.log(users)
+    //     dispatch(getUser())
+    // }, [])
 
-    console.log(users)
-    console.log(isLoading)
+    // console.log(users)
+    // console.log(isLoading)
 
     return (
         <div className={`${styles['home-container']}`}>
@@ -43,7 +43,7 @@ const HomeRecruiter = () => {
                 </div>
             </div>
             <div className={`${styles['cards-container']}`}>
-                {isLoading === true ? <Loading /> : users.map(user => {
+                {/* {isLoading === true ? <Loading /> : users.map(user => {
                     return (
                         <React.Fragment>
                             <Card
@@ -52,13 +52,30 @@ const HomeRecruiter = () => {
                             />
                         </React.Fragment>
                     )
-                })}
-                {/* <Card />
+                })} */}
                 <Card />
                 <Card />
-                <Card /> */}
+                <Card />
+                <Card />
             </div>
             {/* <Loading /> */}
+            <div
+                style={{ 
+                    marginLeft: 100,
+                 }}
+            >
+            {new Array(3).fill().map((item, index) =>
+                        <button
+                            // onClick={() => handlePage(index + 1)}
+                            // text={index + 1}
+                            // key={index}
+                            style={{ 
+                                marginRight: 20,
+                             }}
+                        >
+                            {index + 1}
+                        </button>)}
+            </div>
 
 
             <Footer />

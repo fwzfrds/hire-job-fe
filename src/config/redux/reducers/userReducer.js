@@ -24,6 +24,37 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: false
             }
+        case 'REGIS_USER_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'REGIS_USER_SUCCESS':
+            return {
+                ...state,
+                users: action.payload,
+                isLoading: false
+            }
+        case 'REGIS_USER_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+        case 'LOGIN_USER_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'LOGIN_USER_SUCCESS':
+            return {
+                ...state,
+                isLoading: false
+            }
+        case 'LOGIN_USER_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
 
         default:
             return state
