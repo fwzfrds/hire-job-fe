@@ -5,6 +5,8 @@ import styles from './HomeRecruiter.module.css'
 import { getUser } from '../../../config/redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/base/loading/Loading'
+import Navbar from '../../../components/module/navbar'
+import Searchbar from '../../../components/module/searchbar'
 
 const HomeRecruiter = () => {
 
@@ -21,7 +23,7 @@ const HomeRecruiter = () => {
 
     return (
         <div className={`${styles['home-container']}`}>
-            <nav
+            {/* <nav
                 style={{
                     width: '100%',
                     height: 70,
@@ -33,15 +35,17 @@ const HomeRecruiter = () => {
                 }}
             >
                 Navbar
-            </nav>
+            </nav> */}
+            <Navbar />
             <div className={`${styles.header}`}>
                 <h3 className={`${styles['header-title']}`}>Home</h3>
             </div>
-            <div className={`${styles['search-container']}`}>
+            {/* <div className={`${styles['search-container']}`}>
                 <div className={`${styles.search}`}>
                     search
                 </div>
-            </div>
+            </div> */}
+            <Searchbar />
             <div className={`${styles['cards-container']}`}>
                 {/* {isLoading === true ? <Loading /> : users.map(user => {
                     return (

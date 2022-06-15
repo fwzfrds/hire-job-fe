@@ -21,7 +21,8 @@ const Searchbar = () => {
         borderRadius: '10px',
         marginTop: '50px',
         padding: '10px',
-        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        background: 'white'
         }}>
         <Input 
         type='text'
