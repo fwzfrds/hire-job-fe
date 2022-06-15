@@ -14,13 +14,14 @@ import mail from './mail.png'
 import instagram from './instagram.png'
 import phone from './phone.png'
 import linkedin from './linkedin.png'
+import Footer from '../../components/module/footer/Footer';
 
 const Profile = () => {
   return (
     <div>
         <Navbar />
 
-        <div className='container'>
+        <div className='container' style={{marginBottom: '150px'}}>
             <div className={styles['profile-card']}>
                 <div className={styles['cover-image']}>
                     <img src={cover} alt='cover'/>
@@ -70,7 +71,7 @@ const Profile = () => {
             </div>
         </div>
 
-        {/* <Footer /> */}
+        <Footer />
     </div>
   )
 }

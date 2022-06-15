@@ -5,6 +5,12 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
 }
 
+.navigation-bar-LP {
+    height: 75px;
+    display: flex;
+    align-items: center;
+}
+
 .navbar-wrapper {
     display: flex;
     align-items: center;

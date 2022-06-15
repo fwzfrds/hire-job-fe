@@ -10,6 +10,7 @@ import edit from './edit2.png'
 import location from './location.png'
 import Navbar from '../../components/module/navbar';
 import Input from '../../components/base/input';
+import Footer from '../../components/module/footer/Footer';
 
 const ProfileEdit = () => {
   return (
@@ -141,6 +142,7 @@ const ProfileEdit = () => {
             </div>
         </div>
 
+        <Footer />
     </div>
   )
 }
