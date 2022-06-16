@@ -1,11 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../../components/base/logo/Logo'
 import Banner from '../../../components/module/banner/Banner'
 import styles from './LoginRecruiter.module.css'
+import { login } from '../../../config/redux/actions/recruiterAction'
+import { useDispatch, useSelector } from 'react-redux'
+import ValidMessage from '../../../components/base/validation/ValidMessage';
+import swal from 'sweetalert'
 
-const LoginRecruiter
- = () => {
+const LoginRecruiter = () => {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { isLoading } = useSelector((state) => state.users)
+  
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+  })
+  const [isInputValid, setIsInputValid] = useState({
+    email: '',
+    password: ''
+  })
+
   return (
     <div className={`${styles['login-container']}`}>
       <Banner
@@ -19,10 +36,10 @@ const LoginRecruiter
       <Logo
         colorLogo={'purple'}
         style={{
-            width: 100,
-            display: `${window.innerWidth > 600 && 'none'}`,
-            marginTop: 0,
-            alignSelf: 'start'
+          width: 100,
+          display: `${window.innerWidth > 600 && 'none'}`,
+          marginTop: 0,
+          alignSelf: 'start'
         }}
       />
       <div className={`${styles['login-form']}`}>
@@ -37,11 +54,11 @@ const LoginRecruiter
         <form className={`${styles['input-form']}`}>
           <div className={`${styles['input-container']}`}>
             <label htmlFor="">Email</label>
-            <input type="email" placeholder='Masukkan alamat email'/>
+            <input type="email" placeholder='Masukkan alamat email' />
           </div>
           <div className={`${styles['input-container']}`}>
             <label htmlFor="">Kata Sandi</label>
-            <input type="password" placeholder='Masukkan kata sandi'/>
+            <input type="password" placeholder='Masukkan kata sandi' />
           </div>
           <Link to='/recruiter/reset-password' className={`${styles['forgot-password']}`}>Lupa kata sandi?</Link>
           <button className={`${styles['login-button']}`}>Masuk</button>

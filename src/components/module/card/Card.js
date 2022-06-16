@@ -3,11 +3,11 @@ import JobSeekerAva from '../../base/jobseekerAva/Image'
 import SkillTag from '../../base/skillTag/SkillTag'
 import styles from './Card.module.css'
 
-const Card = () => {
+const Card = ({img, name, location}) => {
   return (
     <div className={`${styles['card-container']}`}>
         <JobSeekerAva
-            source={'/assets/img/abramov.jpg'}
+            source={img ? img : 'https://fakeimg.pl/300/?text=Photo'}
             style={{ 
                 width: 100,
                 height: 100,
@@ -17,7 +17,7 @@ const Card = () => {
              }}
         />
         <div className={`${styles['jobseeker-info']}`}>
-            <h3 className={`${styles.name}`}>Louis Tomlinson</h3>
+            <h3 className={`${styles.name}`}>{name}</h3>
             <p className={`${styles.role}`}>Web Developer</p>
             <div className={`${styles.location}`}>
                 <img 
@@ -26,7 +26,7 @@ const Card = () => {
                         alignSelf: 'center'
                      }} 
                 />
-                <p className={`${styles['jobseeker-loc']}`}>Jakarta</p>
+                <p className={`${styles['jobseeker-loc']}`}>{location}</p>
             </div>
             <div className={`${styles.skills}`}>
                 <SkillTag

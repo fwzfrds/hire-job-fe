@@ -1,10 +1,62 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../../components/base/logo/Logo'
 import Banner from '../../../components/module/banner/Banner'
 import styles from './RegisterJobseeker.module.css'
+import swal from 'sweetalert'
+// import axios from 'axios'
+import {register} from '../../../config/redux/actions/userAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 const RegisterJobseeker = () => {
+
+  const dispatch = useDispatch()
+  const { isLoading, users } = useSelector((state) => state.users)
+
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    hp: ''
+  })
+
+  const [confirmPassword, setConfirmPassword] = useState(null)
+
+  const handleInput = (e) => {
+    e.persist();
+
+    setData({ ...data, [e.target.name]: e.target.value });
+
+  }
+
+  const handleConfirmInput = (e) => {
+    e.persist();
+
+    console.log(e.target.value)
+
+    setConfirmPassword(e.target.value)
+
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (confirmPassword === data.password) {
+      console.log('registrasi bisa')
+      dispatch(register(data))
+    } else {
+      console.log('konfirmasi password tidak sesuai')
+      swal({
+        title: "Regist Error!",
+        text: `Konfirmasi kata sandi tidak sesuai`,
+        icon: "error"
+      });
+    }
+
+  }
+
+  console.log(users)
+
   return (
     <div className={`${styles['login-container']}`}>
       <Banner
@@ -18,10 +70,10 @@ const RegisterJobseeker = () => {
       <Logo
         colorLogo={'purple'}
         style={{
-            width: 100,
-            display: `${window.innerWidth > 600 && 'none'}`,
-            marginTop: 20,
-            alignSelf: 'start'
+          width: 100,
+          display: `${window.innerWidth > 600 && 'none'}`,
+          marginTop: 20,
+          alignSelf: 'start'
         }}
       />
       <div className={`${styles['login-form']}`}>
@@ -33,28 +85,28 @@ const RegisterJobseeker = () => {
           <h3 className={`${styles.title}`}>Register</h3>
           <p className={`${styles.text}`}>Lorom ipsum dolor si amet uegas anet.</p>
         </div>
-        <form className={`${styles['input-form']}`}>
+        <form className={`${styles['input-form']}`} onSubmit={handleSubmit}>
           <div className={`${styles['input-container']}`}>
             <label htmlFor="name">Nama</label>
-            <input type="text" id='name' placeholder='Masukkan nama lengkap'/>
+            <input type="text" id='name' name='name' placeholder='Masukkan nama lengkap' onChange={handleInput} />
           </div>
           <div className={`${styles['input-container']}`}>
             <label htmlFor="email">Email</label>
-            <input type="email" id='email' placeholder='Masukkan alamat email'/>
+            <input type="email" id='email' name='email' placeholder='Masukkan alamat email' onChange={handleInput} />
           </div>
           <div className={`${styles['input-container']}`}>
             <label htmlFor="phone">No. Handphone</label>
-            <input type="tel" id='phone' placeholder='Masukkan nomor handphone aktif'/>
+            <input type="tel" id='phone' name='hp' placeholder='Masukkan nomor handphone aktif' onChange={handleInput} />
           </div>
           <div className={`${styles['input-container']}`}>
             <label htmlFor="password">Kata Sandi</label>
-            <input type="password" id='password' placeholder='Masukkan kata sandi'/>
+            <input type="password" id='password' name='password' placeholder='Masukkan kata sandi' onChange={handleInput} />
           </div>
           <div className={`${styles['input-container']}`}>
             <label htmlFor="confirm">Konfirmasi kata sandi</label>
-            <input type="password" id='confirm' placeholder='Masukkan konfirmasi kata sandi'/>
+            <input type="password" id='confirm' name='confirm' placeholder='Masukkan konfirmasi kata sandi' onChange={handleConfirmInput} />
           </div>
-          <button className={`${styles['register-button']}`}>Daftar</button>
+          <button type='submit' className={`${styles['register-button']}`}>Daftar</button>
           <p>Anda sudah punya akun? <Link to='/jobseeker/login' className={`${styles['signup-here']}`}>Masuk disini</Link></p>
         </form>
       </div>

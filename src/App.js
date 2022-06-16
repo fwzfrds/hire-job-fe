@@ -7,8 +7,8 @@ import Router from './config/routers';
 function App() {
   return (
     <div className="App">
-      <Router />
-      {/* <Routers /> */}
+      {/* <Router /> */}
+      <Routers />
     </div>
   );
 }
