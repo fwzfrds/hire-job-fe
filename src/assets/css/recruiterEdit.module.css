@@ -128,3 +128,23 @@
     border: 1px solid #5E50A1;
     border-radius: 4px;
 }
+
+@media only screen and (max-width: 600px) {
+    .goes-horizontal {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .goes-horizontal > div {
+        width: 100% !important;
+    }
+    .goes-horizontal > div > a {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .form > a {
+        display: none !important;
+    }
+}

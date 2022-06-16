@@ -1,13 +1,19 @@
 .navigation-bar {
     height: 75px;
+    background-color: #FFFFFF;
     width: 100%;
     display: flex;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: #FFF;
     position: sticky;
     top: 0px;
     z-index: 10;
+}
+
+.navigation-bar-LP {
+    height: 75px;
+    display: flex;
+    align-items: center;
 }
 
 .navbar-wrapper {

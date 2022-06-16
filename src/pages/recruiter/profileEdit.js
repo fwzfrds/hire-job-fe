@@ -1,4 +1,7 @@
 import React from 'react'
+import Navbar from '../../components/module/navbar';
+import Input from '../../components/base/input';
+import Footer from '../../components/module/footer/Footer';
 import Button from '../../components/base/button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -8,8 +11,7 @@ import cover from './cover.jpg'
 import profile from './profile.png'
 import edit from './edit2.png'
 import location from './location.png'
-import Navbar from '../../components/module/navbar';
-import Input from '../../components/base/input';
+import { Link } from 'react-router-dom';
 
 const ProfileEdit = () => {
   return (
@@ -21,7 +23,7 @@ const ProfileEdit = () => {
                 <img src={cover} alt='cover'/>
             </div>
 
-            <div className='container' style={{display: 'flex', justifyContent: 'space-between', marginTop: '-200px'}}>
+            <div className={`container ${styles['goes-horizontal']}`} style={{display: 'flex', justifyContent: 'space-between', marginTop: '-200px'}}>
                 <div style={{display: 'flex', flexDirection: 'column', width: '30%'}}>
                     <div className={styles['profile-card']}>
                         <div className={styles['profile-image']}>
@@ -38,29 +40,32 @@ const ProfileEdit = () => {
                             <span style={{marginLeft: '5px'}}>Purwokerto, Jawa Tengah</span>
                         </div>
                     </div>
-                    <Button
-                    type='submit'
-                    className={styles['save-button']}
-                    style={{
-                        fontWeight: '700'
-                    }}
-                    onClick=''
-                    value=''
-                    title='Simpan'
-                    />
-                    <Button
-                    type='submit'
-                    className={styles['cancel-button']}
-                    style={{
-                        fontWeight: '700'
-                    }}
-                    onClick=''
-                    value=''
-                    title='Batal'
-                    />
+                    <Link to='/profile'>
+                        <Button
+                        type='submit'
+                        className={styles['save-button']}
+                        style={{
+                            fontWeight: '700'
+                        }}
+                        title='Simpan'
+                        />
+                    </Link>
+
+                    <Link to='/profile'>
+                        <Button
+                        type='submit'
+                        className={styles['cancel-button']}
+                        style={{
+                            fontWeight: '700'
+                        }}
+                        onClick=''
+                        value=''
+                        title='Batal'
+                        />
+                    </Link>
                 </div>
 
-                <div style={{display: 'flex', flexDirection: 'column', width: '65%'}}>
+                <div className={styles.form} style={{display: 'flex', flexDirection: 'column', width: '65%'}}>
                     <div className={styles['edit-form']}>
                         <span className={styles.title}>Data Diri</span>
                         <div className={styles.hl}></div>
@@ -137,10 +142,34 @@ const ProfileEdit = () => {
                             />
                         </div>
                     </div>
+                    <Link to='/profile'>
+                        <Button
+                        type='submit'
+                        className={styles['save-button']}
+                        style={{
+                            fontWeight: '700'
+                        }}
+                        title='Simpan'
+                        />
+                    </Link>
+
+                    <Link to='/profile'>
+                        <Button
+                        type='submit'
+                        className={styles['cancel-button']}
+                        style={{
+                            fontWeight: '700'
+                        }}
+                        onClick=''
+                        value=''
+                        title='Batal'
+                        />
+                    </Link>
                 </div>
             </div>
         </div>
 
+        <Footer />
     </div>
   )
 }

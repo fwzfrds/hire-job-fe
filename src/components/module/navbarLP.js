@@ -10,7 +10,7 @@ import Button from '../base/button';
 
 const NavbarLP = () => {
   return (
-    <nav className={styles['navigation-bar']}>
+    <nav className={styles['navigation-bar-LP']}>
         <div className='container'>
             <div className={styles['navbar-wrapper']}>
                 <NavLink to='/'>
