@@ -1,5 +1,8 @@
 .navigation-bar {
     height: 75px;
+    position: sticky;
+    top: 0;
+    background-color: #FFFFFF;
     display: flex;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)

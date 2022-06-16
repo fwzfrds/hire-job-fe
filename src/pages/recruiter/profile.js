@@ -15,6 +15,7 @@ import instagram from './instagram.png'
 import phone from './phone.png'
 import linkedin from './linkedin.png'
 import Footer from '../../components/module/footer/Footer';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   return (
@@ -42,16 +43,16 @@ const Profile = () => {
                         <span className={styles.biodata}>Purwokerto, Jawa Tengah</span>
                     </div>
                     <p className={styles.biodata}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae eveniet quae magni corporis. Aliquid aliquam cumque, doloremque illo vitae explicabo aperiam ut voluptate veritatis nulla, similique quidem, ad fuga possimus!</p>
+                    <Link to='/profile-edit'>
                     <Button
                     type='submit'
                     className={styles['edit-button']}
                     style={{
                         fontWeight: '700'
                     }}
-                    onClick=''
-                    value=''
                     title='Edit Profile'
                     />
+                    </Link>
                     <div className={styles.contacts}>
                         <div className={styles['contact-logo']}>
                             <img src={mail} alt='email'/>

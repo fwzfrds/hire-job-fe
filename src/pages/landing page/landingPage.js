@@ -19,7 +19,7 @@ const LandingPage = () => {
         <NavbarLP />
 
         <div style={{display: 'flex', flexDirection: 'column'}}>
-            <div className='container' style={{display: 'flex', alignItems: 'center', marginTop: '60px'}}>
+            <div className={`container ${styles['goes-horizontal']}`} style={{display: 'flex', alignItems: 'center', marginTop: '60px'}}>
                 <div style={{width: '45%'}}>
                     <p style={{fontSize: '44px', fontWeight: '600'}}>Talenta terbaik negeri untuk perubahan revolusi 4.0</p>
                     <p style={{color: '#46505C', marginBottom: '30px'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad nulla maiores optio laudantium veritatis non sed.</p>
@@ -33,7 +33,7 @@ const LandingPage = () => {
                 </div>
             </div>
 
-            <div className='container' style={{display: 'flex', alignItems: 'flex-start', marginTop: '60px'}}>
+            <div className={`container ${styles['goes-horizontal']}`} style={{display: 'flex', alignItems: 'flex-start', marginTop: '60px'}}>
                 <div style={{width: '50%'}}>
                     <img src={ads2} alt='' style={{width: '100%'}}/>
                 </div>
@@ -61,11 +61,11 @@ const LandingPage = () => {
                 </div>
             </div>
 
-            <div className='container' style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginTop: '60px'}}>
+            <div className={`container ${styles['goes-horizontal']}`} style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginTop: '60px'}}>
                 <div style={{width: '35%', marginRight: '15px'}}>
                     <span style={{fontSize: '36px', fontWeight: '600'}}>Skill Talent</span>
                     <p style={{color: '#46505C', marginTop: '20px'}}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem culpa aperiam expedita temporibus earum.</p>
-                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div className={styles['goes-horizontal']} style={{display: 'flex', justifyContent: 'space-between'}}>
                         <div>
                             <div className={styles.skillset}>
                                 <img src={tick2} alt=''/>
@@ -112,7 +112,7 @@ const LandingPage = () => {
 
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px', backgroundColor: '#46505C0E'}}>
                 <span style={{fontSize: '30px', fontWeight: '600', margin: '60px 0 0'}}>Their opinion about Peworld</span>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div className={styles['goes-horizontal']} style={{display: 'flex', justifyContent: 'center'}}>
                     <div className={styles.testimony}>
                         <div style={{width: '40%', margin: '20px 0'}}>
                             <img src={testimony1} alt='' style={{width: '100%'}}/>

@@ -15,10 +15,10 @@ const Hiring = () => {
     <div>
       <Navbar />
 
-      <div className='container'>
-        <div  style={{display: 'flex', justifyContent: 'space-between', marginTop: '50px'}}>
+      <div>
+        <div className={`container ${styles['goes-horizontal']}`}  style={{display: 'flex', justifyContent: 'space-between', marginTop: '50px'}}>
           {/* profile */}
-          <div style={{width: '30%', height: 'max-content', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '20px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}>
+          <div className={styles.profile} style={{width: '30%', height: 'max-content', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '20px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'}}>
             <div style={{width: '50%', margin: '10px 0 20px', alignSelf: 'center'}}>
               <img src={profile} alt='' style={{width: '100%'}}/>
             </div>
