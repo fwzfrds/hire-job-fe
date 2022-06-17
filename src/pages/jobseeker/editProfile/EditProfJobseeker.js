@@ -233,7 +233,7 @@ const EditProfJobseeker = () => {
                     <form id='skill-form' className={`${styles['skill']}`}>
                         <h4>Skill</h4>
                         <hr />
-                        {isLoading === true ? 'Updating...' : userSkill.map((skill, idx) => {
+                        {Object.keys(userSkill).length === 1 ? 'Updating...' : userSkill.map((skill, idx) => {
                             return (
                                 <div className={`${styles.skillList}`} key={idx}>
                                     <p>{skill.skill_name}</p>
@@ -281,7 +281,7 @@ const EditProfJobseeker = () => {
                     <form id='experience-form' className={`${styles['experience']}`}>
                         <h4>Pengalaman Kerja</h4>
                         <hr />
-                        {isLoading === true ? 'Updating...' : userExperience.map((exp, idx) => {
+                        {Object.keys(userExperience).length === 1 ? 'Updating...' : userExperience.map((exp, idx) => {
                             return (
                                 <div 
                                     key={idx} 
