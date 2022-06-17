@@ -9,6 +9,7 @@ const initialState = {
 export const userReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        // Get User
         case 'GET_USER_PENDING':
             return {
                 ...state,
@@ -26,6 +27,7 @@ export const userReducer = (state = initialState, action) => {
                 isLoading: false
             }
 
+        // Regis User
         case 'REGIS_USER_PENDING':
             return {
                 ...state,
@@ -43,6 +45,7 @@ export const userReducer = (state = initialState, action) => {
                 isLoading: false
             }
 
+        // Login User
         case 'LOGIN_USER_PENDING':
             return {
                 ...state,
@@ -54,6 +57,24 @@ export const userReducer = (state = initialState, action) => {
                 isLoading: false
             }
         case 'LOGIN_USER_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        // Update User
+        case 'UPDATE_USER_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'UPDATE_USER_SUCCESS':
+            return {
+                ...state,
+                users: action.payload,
+                isLoading: false
+            }
+        case 'UPDATE_USER_ERROR':
             return {
                 ...state,
                 isLoading: false

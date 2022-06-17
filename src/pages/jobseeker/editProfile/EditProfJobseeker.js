@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './EditProfJobseeker.module.css'
 import Navbar from '../../../components/module/navbar'
 import JobSeekerAva from '../../../components/base/jobseekerAva/Image'
@@ -8,7 +8,7 @@ import Input from '../../../components/base/input'
 import Textarea from '../../../components/base/textarea/Textarea'
 import swal from 'sweetalert'
 import { useNavigate } from 'react-router-dom'
-import { addSkill, getUserSkill, deleteUserSkill, addExperience, deleteUserExp, getUserExperience } from '../../../config/redux/actions/userAction'
+import { addSkill, getUserSkill, deleteUserSkill, addExperience, deleteUserExp, getUserExperience, updatePersonal } from '../../../config/redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/base/loading/Loading'
 
@@ -17,13 +17,28 @@ const EditProfJobseeker = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [authToken, setAuthToken] = useState('')
-    
+    const [image, setImage] = useState('http://fakeimg.pl/190x190/?text=Image')
+    const [saveImg, setSaveImg] = useState(null)
+    const target = useRef(null)
+    const handleClickUpload = () => {
+        console.log(target.current)
+        target.current.click()
+      }
+
     // State from redux
     const { isLoading, userSkill } = useSelector((state) => state.userSkill)
 
     const { isLoading: isLoadingExp, userExperience } = useSelector((state) => state.userExperience)
 
     // Local state for submit
+    const [personalData, setPersonalData] = useState({
+        full_name: '',
+        jobdesk: '',
+        address: '',
+        workplace: '',
+        description: '',
+    })
+
     const [skill, setSkill] = useState({
         skillName: ''
     })
@@ -52,6 +67,60 @@ const EditProfJobseeker = () => {
             dispatch(getUserExperience(authToken))
         }
     }, [authToken, dispatch])
+
+    // Personal Data Handling
+    const handleDataInput = (e) => {
+        e.persist();
+
+        setPersonalData({ ...personalData, [e.target.name]: e.target.value })
+    }
+
+    const handleUploadChange = (e) => {
+        console.log(e.target.files[0]);
+        let uploaded = e.target.files[0]
+        // console.log(URL.createObjectURL(uploaded));
+        setImage(URL.createObjectURL(uploaded))
+        setSaveImg(uploaded)
+    }
+
+    const handleSubmitPersonal = async (e) => {
+        e.preventDefault()
+
+        if (!saveImg) {
+            swal({
+                title: "Good job!",
+                text: 'Upload Gambar Dulu',
+                icon: "error",
+            });
+        } else {
+            let formData = new FormData()
+            formData.append('photo', saveImg)
+
+            formData.append('full_name', personalData.full_name)
+            formData.append('jobdesk', personalData.jobdesk)
+            formData.append('address', personalData.address)
+            formData.append('workplace', personalData.workplace)
+            formData.append('description', personalData.description)
+
+            try {
+                dispatch(updatePersonal(formData, authToken))
+                // console.log('Update Personal Data Success!')
+                // swal({
+                //     title: "Succes",
+                //     text: `Personal Data Updated`,
+                //     icon: "success",
+                // });
+            } catch (error) {
+                console.log(error.response.data.message);
+                swal({
+                    title: "Add Personal Data Error!",
+                    text: `${error.response.data.message}`,
+                    icon: "error",
+                });
+            }
+        }
+    }
+    // Personal Data Handling End
 
     // Skill handling
     const handleSkillInput = (e) => {
@@ -113,10 +182,9 @@ const EditProfJobseeker = () => {
 
         return false
     }
-
-    console.log(userSkill)
-    console.log(userExperience)
     // Experience handling End
+
+    console.log(personalData)
 
     return (
         <div className={`${styles['profile-jobseeker']}`}>
@@ -127,7 +195,7 @@ const EditProfJobseeker = () => {
             <div className={`${styles['profile-container']}`}>
                 <div className={`${styles['side-profile']}`}>
                     <JobSeekerAva
-                        source={'/assets/img/abramov.jpg'}
+                        source={image}
                         style={{
                             width: 150,
                             height: 150,
@@ -136,7 +204,24 @@ const EditProfJobseeker = () => {
                             alignSelf: 'center'
                         }}
                     />
-                    <p>Edit</p>
+                    {/* <img src={image} alt="" /> */}
+                    <input
+                        style={{
+                            display: 'none'
+                        }}
+                        type={'file'}
+                        accept='image/png, image/jpeg, image/jpg'
+                        ref={target}
+                        onChange={handleUploadChange}
+                    />
+                    <Button
+                        title={`Edit`}
+                        type={'button'}
+                        style={{
+                            
+                        }}
+                        onClick={handleClickUpload}
+                    />
                     <div className={`${styles['about-profile']}`}>
                         <h3 className={`${styles.name}`}>Louis Tomlinson</h3>
                         <h6 className={`${styles.position}`}>Web Developer</h6>
@@ -147,6 +232,7 @@ const EditProfJobseeker = () => {
                         <p className={`${styles.status}`}>Freelancer</p>
                     </div>
                     <Button
+                        form={'personal-form'}
                         title={`Simpan`}
                         type={'button'}
                         style={{
@@ -160,6 +246,7 @@ const EditProfJobseeker = () => {
                             fontWeight: 700,
                             marginTop: '0px'
                         }}
+                        onClick={handleSubmitPersonal}
                     />
                     <Button
                         title={`Batal`}
@@ -178,7 +265,7 @@ const EditProfJobseeker = () => {
                     />
                 </div>
                 <div className={`${styles['profile-data']}`}>
-                    <form className={`${styles['personal-data']}`}>
+                    <form id='personal-form' className={`${styles['personal-data']}`}>
                         <h4>Data Diri</h4>
                         <hr />
                         <div className={`${styles['input-group']}`}>
@@ -191,6 +278,8 @@ const EditProfJobseeker = () => {
                                     border: '1px solid #9EA0A5',
                                     borderRadius: '5px'
                                 }}
+                                name={`full_name`}
+                                onChange={handleDataInput}
                             />
                         </div>
                         <div className={`${styles['input-group']}`}>
@@ -203,6 +292,8 @@ const EditProfJobseeker = () => {
                                     border: '1px solid #9EA0A5',
                                     borderRadius: '5px'
                                 }}
+                                name={`jobdesk`}
+                                onChange={handleDataInput}
                             />
                         </div>
                         <div className={`${styles['input-group']}`}>
@@ -215,6 +306,8 @@ const EditProfJobseeker = () => {
                                     border: '1px solid #9EA0A5',
                                     borderRadius: '5px'
                                 }}
+                                name={`address`}
+                                onChange={handleDataInput}
                             />
                         </div>
                         <div className={`${styles['input-group']}`}>
@@ -227,12 +320,16 @@ const EditProfJobseeker = () => {
                                     border: '1px solid #9EA0A5',
                                     borderRadius: '5px'
                                 }}
+                                name={`workplace`}
+                                onChange={handleDataInput}
                             />
                         </div>
                         <div className={`${styles['input-group']}`}>
                             <Textarea
                                 labelName={'Deskripsi Singkat'}
                                 id={'personal'}
+                                name={`description`}
+                                onChange={handleDataInput}
                             />
                         </div>
                     </form>
@@ -289,8 +386,8 @@ const EditProfJobseeker = () => {
                         <hr />
                         {Object.keys(userExperience).length === 1 ? 'Updating...' : userExperience.map((exp, idx) => {
                             return (
-                                <div 
-                                    key={idx} 
+                                <div
+                                    key={idx}
                                     className={`${styles.experience_list}`}
                                 >
                                     <p>{exp.corps_name} : <span>{exp.jobdesk}</span></p>
@@ -301,7 +398,7 @@ const EditProfJobseeker = () => {
                                     </button>
                                 </div>
                             )
-                        } )
+                        })
                         }
                         <hr />
                         <div className={`${styles['form-experience']}`}>

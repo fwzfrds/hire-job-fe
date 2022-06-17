@@ -102,6 +102,36 @@ export const login = (data, navigate) => async (dispatch) => {
     }
 }
 
+export const updatePersonal = (formData, authToken) => async (dispatch) => {
+    try {
+        dispatch({ type: 'UPDATE_USER_PENDING' })
+
+        const result = await axios.patch(`${process.env.REACT_APP_API_BACKEND}/v1/profile/profile`, formData, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        console.log(result);
+        swal({
+            title: "Good job!",
+            text: `${result.data.message}`,
+            icon: "success"
+        });
+
+        const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/getuser`)
+        const products = resultGet.data
+
+        dispatch({ type: 'UPDATE_USER_SUCCESS', payload: products })
+
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: 'UPDATE_USER_ERROR' })
+        swal({
+            title: "Update",
+            text: `Update Personal Data Error`,
+            icon: "error",
+        });
+    }
+}
+
 export const addSkill = (skill, authToken, navigate) => async (dispatch) => {
     try {
         dispatch({ type: 'ADD_USER_SKILL_PENDING' })
