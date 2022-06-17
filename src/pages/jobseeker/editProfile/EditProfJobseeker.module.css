@@ -141,6 +141,20 @@
     width: 100%;
 }
 
+.experience_list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.experience_list button {
+    background: none;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+}
+
 /* Drag n Drop Area Start */
 .drag-area {
     border: 2px dashed #9EA0A5;

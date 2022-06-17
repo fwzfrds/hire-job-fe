@@ -240,3 +240,38 @@ export const addExperience = (experience, authToken, navigate) => async (dispatc
         }
     }
 }
+
+export const deleteUserExp = (authToken, id, jobdesk, corps_name) => async (dispatch) => {
+    try {
+        dispatch({ type: 'DELETE_USER_EXPERIENCE_PENDING' })
+
+        // Delete User Experience
+        await axios.delete(`${process.env.REACT_APP_API_BACKEND}/v1/profile/experience/${id}`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+       
+        // Get Experience yang sudah terupdate
+        const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/experience`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        console.log(resultGet.data.data)
+        const experiences = resultGet.data.data
+
+        dispatch({ type: 'DELETE_USER_EXPERIENCE_SUCCESS', payload: experiences })
+
+        swal({
+            title: "Succes",
+            text: `Experience at ${corps_name} as ${jobdesk} has been deleted`,
+            icon: "success",
+        });
+
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: 'DELETE_USER_EXPERIENCE_ERROR' })
+        swal({
+            title: `Delete Experience at ${corps_name} as ${jobdesk} Error`,
+            text: `${error.response.data.message}`,
+            icon: "error",
+        });
+    }
+}

@@ -8,7 +8,7 @@ import Input from '../../../components/base/input'
 import Textarea from '../../../components/base/textarea/Textarea'
 import swal from 'sweetalert'
 import { useNavigate } from 'react-router-dom'
-import { addSkill, getUserSkill, deleteUserSkill, addExperience } from '../../../config/redux/actions/userAction'
+import { addSkill, getUserSkill, deleteUserSkill, addExperience, deleteUserExp } from '../../../config/redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/base/loading/Loading'
 
@@ -87,13 +87,25 @@ const EditProfJobseeker = () => {
 
     const handleSubmitExperience = (e) => {
         e.preventDefault()
-
-        // swal({
-        //     title: "Good job!",
-        //     text: `Add New Experience Success`,
-        //     icon: "success"
-        // });
         dispatch(addExperience(experience, authToken, navigate))
+    }
+
+    const handleDeleteExp = (e, id, jobdesk, corps_name) => {
+        e.preventDefault()
+        swal({
+            title: "Are you sure?",
+            text: `Experience at ${corps_name} as ${jobdesk} will be deleted`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((isOkay => {
+            if (isOkay) {
+                // console.log('delete experience success')
+                dispatch(deleteUserExp(authToken, id, jobdesk, corps_name))
+            }
+        }))
+
+        return false
     }
 
     console.log(userSkill)
@@ -268,6 +280,23 @@ const EditProfJobseeker = () => {
                     </form>
                     <form id='experience-form' className={`${styles['experience']}`}>
                         <h4>Pengalaman Kerja</h4>
+                        <hr />
+                        {isLoading === true ? 'Updating...' : userExperience.map((exp, idx) => {
+                            return (
+                                <div 
+                                    key={idx} 
+                                    className={`${styles.experience_list}`}
+                                >
+                                    <p>{exp.corps_name} : <span>{exp.jobdesk}</span></p>
+                                    <button
+                                        onClick={(e) => handleDeleteExp(e, exp.id, exp.jobdesk, exp.corps_name)}
+                                    >
+                                        <i className="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            )
+                        } )
+                        }
                         <hr />
                         <div className={`${styles['form-experience']}`}>
                             <div className={`${styles['input-group']}`}>
