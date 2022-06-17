@@ -8,7 +8,7 @@ import Input from '../../../components/base/input'
 import Textarea from '../../../components/base/textarea/Textarea'
 import swal from 'sweetalert'
 import { useNavigate } from 'react-router-dom'
-import { addSkill, getUserSkill, deleteUserSkill, addExperience, deleteUserExp } from '../../../config/redux/actions/userAction'
+import { addSkill, getUserSkill, deleteUserSkill, addExperience, deleteUserExp, getUserExperience } from '../../../config/redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/base/loading/Loading'
 
@@ -44,6 +44,12 @@ const EditProfJobseeker = () => {
     useEffect(() => {
         if (authToken) {
             dispatch(getUserSkill(authToken))
+        }
+    }, [authToken, dispatch])
+
+    useEffect(() => {
+        if (authToken) {
+            dispatch(getUserExperience(authToken))
         }
     }, [authToken, dispatch])
 

@@ -241,6 +241,28 @@ export const addExperience = (experience, authToken, navigate) => async (dispatc
     }
 }
 
+export const getUserExperience = (authToken) => async (dispatch) => {
+    try {
+        dispatch({ type: 'GET_USER_EXPERIENCE_PENDING' })
+
+        const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/experience`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        const experiences = result.data.data
+
+        dispatch({ type: 'GET_USER_EXPERIENCE_SUCCESS', payload: experiences })
+
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: 'GET_USER_EXPERIENCE_ERROR' })
+        swal({
+            title: "Get User Experience Error",
+            text: `${error.response.data.message}`,
+            icon: "error",
+        });
+    }
+}
+
 export const deleteUserExp = (authToken, id, jobdesk, corps_name) => async (dispatch) => {
     try {
         dispatch({ type: 'DELETE_USER_EXPERIENCE_PENDING' })
