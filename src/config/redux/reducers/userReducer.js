@@ -1,11 +1,12 @@
 const initialState = {
     users: {
-        
+        name: '',
+        role: ''
     },
     isLoading: false
 }
 
-const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case 'GET_USER_PENDING':
@@ -62,20 +63,71 @@ const userReducer = (state = initialState, action) => {
             return state
     }
 
-    // if(action.type === 'USER_LOGIN_PENDING'){
-    //     return {
-    //         ...state,
-    //         isLoading: true
-    //     }
-    // }else if(action.type === 'USER_LOGIN_SUCCESS'){
-    //     return{
-    //         ...state,
-    //         user: action.payload,
-    //         isLoading: false
-    //     }
-    // }else{
-    //     return state
-    // }
 }
 
-export default userReducer
+const initialState2 = {
+    detailUser: {
+        name: ''
+    },
+    isLoading: false
+}
+
+export const userDetailReducer = (state = initialState2, action) => {
+
+    switch (action.type) {
+        case 'GET_DETAIL_USER_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'GET_DETAIL_USER_SUCCESS':
+            return {
+                ...state,
+                detailUser: action.payload,
+                isLoading: false
+            }
+        case 'GET_DETAIL_USER_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        default:
+            return state
+    }
+
+}
+
+const initialState3 = {
+    userSkill: {
+        skillname: ''
+    },
+    isLoading: false
+}
+
+export const userSkillReducer = (state = initialState3, action) => {
+
+    switch (action.type) {
+        case 'ADD_USER_SKILL_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'ADD_USER_SKILL_SUCCESS':
+            return {
+                ...state,
+                userSkill: action.payload,
+                isLoading: false
+            }
+        case 'ADD_USER_SKILL_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        default:
+            return state
+    }
+
+}
+

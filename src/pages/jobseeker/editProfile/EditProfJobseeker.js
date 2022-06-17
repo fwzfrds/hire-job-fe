@@ -1,16 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './EditProfJobseeker.module.css'
 import Navbar from '../../../components/module/navbar'
 import JobSeekerAva from '../../../components/base/jobseekerAva/Image'
 import Button from '../../../components/base/button'
 import Footer from '../../../components/module/footer/Footer'
-// import SkillTag from '../../../components/base/skillTag/SkillTag'
-// import SocmedInfo from '../../../components/base/socmedInfo/SocmedInfo'
-// import { Link, Outlet, NavLink } from 'react-router-dom'
 import Input from '../../../components/base/input'
 import Textarea from '../../../components/base/textarea/Textarea'
+// import swal from 'sweetalert'
+import { useNavigate } from 'react-router-dom'
+import {addSkill} from '../../../config/redux/actions/userAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 const EditProfJobseeker = () => {
+
+    const [skill, setSkill] = useState({
+        skillName: ''
+    })
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [authToken, setAuthToken] = useState([])
+    const {isLoading, userSkill} = useSelector((state)=>state.userSkill)
+
+    useEffect(() => {
+        const dataFromLocal = JSON.parse(localStorage.getItem('PeworldUser'))
+        console.log(dataFromLocal.token)
+        setAuthToken(dataFromLocal.token)
+    }, []);
+
+    const handleSkillInput = (e) => {
+        e.persist();
+
+        setSkill({ ...skill, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmitSkill = (e) => {
+        e.preventDefault()
+        dispatch(addSkill(skill, authToken, navigate))
+
+    }
+
+    console.log(userSkill)
+
     return (
         <div className={`${styles['profile-jobseeker']}`}>
             <Navbar 
@@ -129,7 +159,7 @@ const EditProfJobseeker = () => {
                             />
                         </div>
                     </form>
-                    <form className={`${styles['skill']}`}>
+                    <form id='skill-form' className={`${styles['skill']}`}>
                         <h4>Skill</h4>
                         <hr />
                         <div className={`${styles['input-group']} ${styles['input-skill']}`}>
@@ -142,10 +172,13 @@ const EditProfJobseeker = () => {
                                     borderRadius: '5px',
                                     // marginTop: '15px'
                                 }}
+                                name={`skillName`}
+                                onChange={handleSkillInput}
                             />
                             <Button
+                                form={'skill-form'}
                                 title={`Simpan`}
-                                type={'button'}
+                                type={'submit'}
                                 style={{
                                     // width: '297px',
                                     height: '40px',
@@ -158,6 +191,7 @@ const EditProfJobseeker = () => {
                                     // marginTop: '20px',
                                     padding: 10
                                 }}
+                                onClick={handleSubmitSkill}
                             />
                         </div>
                     </form>

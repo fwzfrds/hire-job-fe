@@ -1,6 +1,6 @@
 const initialState = {
     recruiters: {
-        
+        name: ''
     },
     isLoading: false
 }

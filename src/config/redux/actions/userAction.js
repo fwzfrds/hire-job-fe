@@ -4,7 +4,6 @@ import swal from 'sweetalert';
 export const getUser = () => async (dispatch) => {
     try {
         dispatch({ type: 'GET_USER_PENDING' })
-        console.log(process.env.REACT_APP_API_BACKEND)
         const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/getuser`)
         console.log(result.data)
         const users = result.data
@@ -100,5 +99,46 @@ export const login = (data, navigate) => async (dispatch) => {
             text: `Login Error!`,
             icon: "error",
         });
+    }
+}
+
+export const addSkill = (skill, authToken, navigate) => async (dispatch) => {
+    try {
+        dispatch({ type: 'ADD_USER_SKILL_PENDING' })
+
+        // Post Add Skill
+        const result1 = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/profile/skill`, skill, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        console.log(result1)
+
+        // Post register
+        const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/skill`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        console.log(resultGet.data.data)
+        const skills = resultGet.data.data
+
+        swal({
+            title: "Good job!",
+            text: `Add New Skill Success`,
+            icon: "success"
+        });
+
+        dispatch({ type: 'ADD_USER_SKILL_SUCCESS', payload: skills })
+
+    } catch (error) {
+        console.log(error);
+        const errMesage = error.response.data.message
+        dispatch({ type: 'ADD_USER_SKILL_ERROR' })
+        swal({
+            title: "Error!",
+            text: errMesage === 'token expired' ? errMesage + ' please login' : errMesage,
+            icon: "error",
+        });
+        if (errMesage === 'token expired') {
+            localStorage.removeItem('PeworldUser')
+            navigate('/jobseeker/login')
+        }
     }
 }

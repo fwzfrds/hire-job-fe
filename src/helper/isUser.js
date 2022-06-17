@@ -11,7 +11,7 @@ const AuthUser = ({children}) => {
         icon: "error",
     });  
     return (
-      <Navigate to="/login" replace />
+      <Navigate to="/jobseeker/login" replace />
     )
   }
   return children

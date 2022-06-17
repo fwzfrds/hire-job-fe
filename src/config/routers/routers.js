@@ -14,23 +14,25 @@ import Portfolio from '../../components/module/portfolio/Portfolio'
 import Experience from '../../components/module/experience/Experience'
 import EditProfJobseeker from '../../pages/jobseeker/editProfile/EditProfJobseeker'
 import IsUserLogin from '../../helper/isUserLogin'
-
+import LandingPage from '../../pages/landing page/landingPage'
+import AuthUser from '../../helper/isUser'
+import IsRecruiterLogin from '../../helper/isRecruiterLogin'
 
 const Routers = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/jobseeker/register" element={<RegisterJobseeker />} />
         <Route path="/recruiter/register" element={<RegisterRecruiter />} />
         <Route path="/jobseeker/login" element={<IsUserLogin> <LoginJobSeeker /> </IsUserLogin>} />
-        <Route path="/jobseeker/edit/:id" element={<EditProfJobseeker/>} />
+        <Route path="/jobseeker/edit/:id" element={<AuthUser> <EditProfJobseeker/></AuthUser>} />
         <Route path="/recruiter/jobseeker-profile/:id" element={<ProfileJobseeker />}>
           <Route path="portfolio" element={<Portfolio />} />
           <Route path="experience" element={<Experience />} />
         </Route>
         <Route path="/jobseeker/reset-password" element={<ResetPassJobseeker />} />
-        <Route path="/recruiter/login" element={<LoginRecruiter />} />
+        <Route path="/recruiter/login" element={<IsRecruiterLogin> <LoginRecruiter /> </IsRecruiterLogin>} />
         <Route path="/recruiter/home" element={<HomeRecruiter />} />
         <Route path="/recruiter/reset-password" element={<ResetPassRecruiter />} />
         <Route path="*" element={<Page404 />} />

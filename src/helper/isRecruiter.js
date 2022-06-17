@@ -2,20 +2,19 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 import swal from 'sweetalert'
 
-const IsAdminLogin = ({children}) => {
+const AuthRecruiter = ({children}) => {
   const isAuth = localStorage.getItem('PeworldRecruiter')
-  if (isAuth){
+  if (!isAuth){
     swal({
-        title: "Access",
-        text: `Anda Sudah Login!`,
+        title: "Access!",
+        text: `Access Denied, Please Login!`,
         icon: "error",
-    });
-     
+    });  
     return (
-      <Navigate to={-1} replace />
+      <Navigate to="/login-admin" replace />
     )
   }
   return children
 }
 
-export default IsAdminLogin
+export default AuthRecruiter

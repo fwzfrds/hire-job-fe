@@ -14,7 +14,6 @@ const HomeRecruiter = () => {
     const { isLoading, users } = useSelector((state) => state.users)
 
     useEffect(() => {
-        console.log(users)
         dispatch(getUser())
     }, [])
 
@@ -69,7 +68,7 @@ const HomeRecruiter = () => {
                     marginLeft: 100,
                  }}
             >
-            {new Array(users.pagination.totalPage).fill().map((item, index) =>
+            {isLoading === true ? <Loading /> : new Array(users.pagination.totalPage).fill().map((item, index) =>
                         <button
                             // onClick={() => handlePage(index + 1)}
                             // text={index + 1}
