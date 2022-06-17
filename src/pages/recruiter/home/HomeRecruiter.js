@@ -18,6 +18,7 @@ const HomeRecruiter = () => {
     }, [dispatch])
 
     console.log(users)
+    console.log(Object.keys(users).length)
 
     return (
         <div className={`${styles['home-container']}`}>
