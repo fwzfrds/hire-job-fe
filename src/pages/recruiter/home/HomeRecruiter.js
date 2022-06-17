@@ -17,6 +17,8 @@ const HomeRecruiter = () => {
         dispatch(getUser())
     }, [dispatch])
 
+    console.log(users)
+
     return (
         <div className={`${styles['home-container']}`}>
             {/* <nav
