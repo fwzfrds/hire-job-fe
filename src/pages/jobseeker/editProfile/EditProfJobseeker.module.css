@@ -102,6 +102,20 @@
     margin: 0px;
 }
 
+.skillList {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.skillList button {
+    background: none;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+}
+
 .input-group label {
     color: #9EA0A5;
     font-size: 14px;

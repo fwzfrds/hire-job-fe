@@ -108,6 +108,7 @@ const initialState3 = {
 export const userSkillReducer = (state = initialState3, action) => {
 
     switch (action.type) {
+        // ADD USER SKILL
         case 'ADD_USER_SKILL_PENDING':
             return {
                 ...state,
@@ -120,6 +121,112 @@ export const userSkillReducer = (state = initialState3, action) => {
                 isLoading: false
             }
         case 'ADD_USER_SKILL_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        // Get USER SKILL
+        case 'GET_USER_SKILL_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'GET_USER_SKILL_SUCCESS':
+            return {
+                ...state,
+                userSkill: action.payload,
+                isLoading: false
+            }
+        case 'GET_USER_SKILL_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        // Get USER SKILL
+        case 'DELETE_USER_SKILL_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'DELETE_USER_SKILL_SUCCESS':
+            return {
+                ...state,
+                userSkill: action.payload,
+                isLoading: false
+            }
+        case 'DELETE_USER_SKILL_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        default:
+            return state
+    }
+
+}
+
+const initialState4 = {
+    userExperience: {
+        experience: ''
+    },
+    isLoading: false
+}
+
+export const userExperienceReducer = (state = initialState4, action) => {
+
+    switch (action.type) {
+        // ADD USER EXPERIENCE
+        case 'ADD_USER_EXPERIENCE_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'ADD_USER_EXPERIENCE_SUCCESS':
+            return {
+                ...state,
+                userExperience: action.payload,
+                isLoading: false
+            }
+        case 'ADD_USER_EXPERIENCE_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        // Get USER EXPERIENCE
+        case 'GET_USER_EXPERIENCE_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'GET_USER_EXPERIENCE_SUCCESS':
+            return {
+                ...state,
+                userExperience: action.payload,
+                isLoading: false
+            }
+        case 'GET_USER_EXPERIENCE_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        // Get USER EXPERIENCE
+        case 'DELETE_USER_EXPERIENCE_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'DELETE_USER_EXPERIENCE_SUCCESS':
+            return {
+                ...state,
+                userExperience: action.payload,
+                isLoading: false
+            }
+        case 'DELETE_USER_EXPERIENCE_ERROR':
             return {
                 ...state,
                 isLoading: false

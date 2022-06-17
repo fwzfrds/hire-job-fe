@@ -6,44 +6,103 @@ import Button from '../../../components/base/button'
 import Footer from '../../../components/module/footer/Footer'
 import Input from '../../../components/base/input'
 import Textarea from '../../../components/base/textarea/Textarea'
-// import swal from 'sweetalert'
+import swal from 'sweetalert'
 import { useNavigate } from 'react-router-dom'
-import {addSkill} from '../../../config/redux/actions/userAction'
-import {useDispatch, useSelector} from 'react-redux'
+import { addSkill, getUserSkill, deleteUserSkill, addExperience } from '../../../config/redux/actions/userAction'
+import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../../../components/base/loading/Loading'
 
 const EditProfJobseeker = () => {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [authToken, setAuthToken] = useState('')
+    
+    // State from redux
+    const { isLoading, userSkill } = useSelector((state) => state.userSkill)
+
+    const { isLoading: isLoadingExp, userExperience } = useSelector((state) => state.userExperience)
+
+    // Local state for submit
     const [skill, setSkill] = useState({
         skillName: ''
     })
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const [authToken, setAuthToken] = useState([])
-    const {isLoading, userSkill} = useSelector((state)=>state.userSkill)
 
+    const [experience, setExperience] = useState({
+        jobdesk: '',
+        corpName: '',
+        workTime: '',
+        description: ''
+    })
+
+    // Use Effect
     useEffect(() => {
         const dataFromLocal = JSON.parse(localStorage.getItem('PeworldUser'))
-        console.log(dataFromLocal.token)
         setAuthToken(dataFromLocal.token)
     }, []);
 
+    useEffect(() => {
+        if (authToken) {
+            dispatch(getUserSkill(authToken))
+        }
+    }, [authToken, dispatch])
+
+    // Skill handling
     const handleSkillInput = (e) => {
         e.persist();
 
-        setSkill({ ...skill, [e.target.name]: e.target.value})
+        setSkill({ ...skill, [e.target.name]: e.target.value })
     }
 
     const handleSubmitSkill = (e) => {
         e.preventDefault()
         dispatch(addSkill(skill, authToken, navigate))
+    }
 
+    const handleDeleteSkill = (e, id, skillName) => {
+        e.preventDefault()
+        swal({
+            title: "Are you sure?",
+            text: `${skillName} skill will be deleted`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((isOkay => {
+            if (isOkay) {
+                console.log('delete skill...')
+                dispatch(deleteUserSkill(authToken, id, skillName))
+            }
+        }))
+
+        return false
+    }
+    // Skill handling End
+
+    // Experience handling
+    const handleExperienceInput = (e) => {
+        e.persist();
+
+        setExperience({ ...experience, [e.target.name]: e.target.value })
+    }
+
+    const handleSubmitExperience = (e) => {
+        e.preventDefault()
+
+        // swal({
+        //     title: "Good job!",
+        //     text: `Add New Experience Success`,
+        //     icon: "success"
+        // });
+        dispatch(addExperience(experience, authToken, navigate))
     }
 
     console.log(userSkill)
+    console.log(userExperience)
+    // Experience handling End
 
     return (
         <div className={`${styles['profile-jobseeker']}`}>
-            <Navbar 
+            <Navbar
 
             />
             <div className={`${styles['purple-bg']}`}></div>
@@ -162,6 +221,18 @@ const EditProfJobseeker = () => {
                     <form id='skill-form' className={`${styles['skill']}`}>
                         <h4>Skill</h4>
                         <hr />
+                        {isLoading === true ? 'Updating...' : userSkill.map((skill, idx) => {
+                            return (
+                                <div className={`${styles.skillList}`} key={idx}>
+                                    <p>{skill.skill_name}</p>
+                                    <button
+                                        onClick={(e) => handleDeleteSkill(e, skill.id, skill.skill_name)}
+                                    >
+                                        <i className="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            )
+                        })}
                         <div className={`${styles['input-group']} ${styles['input-skill']}`}>
                             <Input
                                 placeholder={'Javascript'}
@@ -195,7 +266,7 @@ const EditProfJobseeker = () => {
                             />
                         </div>
                     </form>
-                    <form className={`${styles['experience']}`}>
+                    <form id='experience-form' className={`${styles['experience']}`}>
                         <h4>Pengalaman Kerja</h4>
                         <hr />
                         <div className={`${styles['form-experience']}`}>
@@ -209,6 +280,8 @@ const EditProfJobseeker = () => {
                                         border: '1px solid #9EA0A5',
                                         borderRadius: '5px'
                                     }}
+                                    name={`jobdesk`}
+                                    onChange={handleExperienceInput}
                                 />
                             </div>
                             <div className={`${styles['double-input-group']}`}>
@@ -222,6 +295,8 @@ const EditProfJobseeker = () => {
                                             border: '1px solid #9EA0A5',
                                             borderRadius: '5px'
                                         }}
+                                        name={`corpName`}
+                                        onChange={handleExperienceInput}
                                     />
                                 </div>
                                 <div className={`${styles['input-group']}`}>
@@ -235,6 +310,8 @@ const EditProfJobseeker = () => {
                                             borderRadius: '5px'
                                         }}
                                         type={'month'}
+                                        name={`workTime`}
+                                        onChange={handleExperienceInput}
                                     />
                                 </div>
                             </div>
@@ -242,11 +319,14 @@ const EditProfJobseeker = () => {
                                 <Textarea
                                     labelName={'Deskripsi Singkat'}
                                     id={'experience'}
+                                    name={`description`}
+                                    onChange={handleExperienceInput}
                                 />
                             </div>
                         </div>
                         <hr />
                         <Button
+                            form={'experience-form'}
                             title={`Tambah Pengalaman Kerja`}
                             type={'button'}
                             style={{
@@ -261,6 +341,7 @@ const EditProfJobseeker = () => {
                                 // marginTop: '20px',
                                 padding: 10
                             }}
+                            onClick={handleSubmitExperience}
                         />
                     </form>
                     <form className={`${styles['portfolio']}`}>
@@ -294,9 +375,9 @@ const EditProfJobseeker = () => {
                             </div>
                         </div>
                         <div className={`${styles['input-group']}`}>
-                            <div 
+                            <div
                                 className={`${styles['drag-area']}`}
-                                // onDragOver={''}
+                            // onDragOver={''}
                             >
                                 <div className={`${styles.icon}`}><i className="fas fa-cloud-upload-alt"></i></div>
                                 <header>Drag & Drop untuk Upload Gambar Aplikasi Mobile</header>
@@ -310,7 +391,7 @@ const EditProfJobseeker = () => {
                                     <div className={`${styles['img-size']}`}>
                                         <img src="/assets/img/icons/expand.png" alt=""
                                         />
-                                        <p 
+                                        <p
                                             className={`${styles['size-text']}`}
                                         >Size 1080x1920 or 600x800</p>
                                     </div>
