@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../../../components/module/card/Card'
 import Footer from '../../../components/module/footer/Footer'
 import styles from './HomeRecruiter.module.css'
@@ -11,14 +11,11 @@ import Searchbar from '../../../components/module/searchbar'
 const HomeRecruiter = () => {
 
     const dispatch = useDispatch()
-    const { isLoading, users } = useSelector((state) => state.users)
+    const { users } = useSelector((state) => state.users)
 
     useEffect(() => {
         dispatch(getUser())
-    }, [])
-
-    console.log(users)
-    console.log(isLoading)
+    }, [dispatch])
 
     return (
         <div className={`${styles['home-container']}`}>
@@ -46,7 +43,7 @@ const HomeRecruiter = () => {
             </div> */}
             <Searchbar />
             <div className={`${styles['cards-container']}`}>
-                {isLoading === true ? <Loading /> : users.data.map(user => {
+                {Object.keys(users).length === 0 ? <Loading /> : users.data.map(user => {
                     return (
                         <React.Fragment key={user.id}>
                             <Card
@@ -68,7 +65,7 @@ const HomeRecruiter = () => {
                     marginLeft: 100,
                  }}
             >
-            {isLoading === true ? <Loading /> : new Array(users.pagination.totalPage).fill().map((item, index) =>
+            {Object.keys(users).length === 0 ? <Loading /> : new Array(users.pagination.totalPage).fill().map((item, index) =>
                         <button
                             // onClick={() => handlePage(index + 1)}
                             // text={index + 1}
