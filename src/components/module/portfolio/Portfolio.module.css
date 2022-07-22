@@ -1,0 +1,31 @@
+.portfolio-container {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.img-container {
+    max-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.img-container img {
+    width: 100%;
+}
+
+/* .img-container {
+    width: 100%;
+} */
+
+@media only screen and (max-width: 600px) {
+
+    .img-container {
+        max-width: 120px;
+    }
+
+}

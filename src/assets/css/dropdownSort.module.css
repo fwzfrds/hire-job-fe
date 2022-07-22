@@ -1,0 +1,32 @@
+.dropdown-wrapper {
+    margin: 0 25px;
+}
+
+.toggler::after {
+    display: none !important;
+}
+
+.toggler:focus {
+    box-shadow: none !important;
+}
+
+.label {
+    color: #9EA0A5;
+}
+
+.menu {
+    width: 250px;
+    margin-left: -80px !important;
+    padding: 10px 15px !important;
+}
+
+.options, .options:hover {
+    text-decoration: none;
+    color: #1F2A36;
+}
+
+@media only screen and (max-width: 1200px) {
+    .dropdown-wrapper {
+        margin: 0 10px;
+    }
+}

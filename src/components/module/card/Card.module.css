@@ -1,0 +1,66 @@
+.card-container {
+    display: flex;
+    align-items: center;
+    /* border: 1px solid black; */
+    background: #FFF;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+}
+
+.jobseeker-info {
+    width: 70%;
+    margin-left: 30px;
+}
+
+.name, .role, .jobseeker-loc {
+    margin: 0px;
+    color: #9EA0A5;
+    margin-bottom: 10px;
+}
+
+.name {
+    color: #1F2A36;
+}
+
+.jobseeker-loc {
+    margin-bottom: 0px;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.location img {
+    display: inline-block;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    .card-container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .jobseeker-info {
+        margin-left: 0px;
+        text-align: center;
+    }
+
+    .location {
+        justify-content: center;
+    }
+
+    .skills {
+        justify-content: center;
+    }
+}
