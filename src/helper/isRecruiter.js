@@ -11,7 +11,7 @@ const AuthRecruiter = ({children}) => {
         icon: "error",
     });  
     return (
-      <Navigate to="/login-admin" replace />
+      <Navigate to="/recruiter/login" replace />
     )
   }
   return children

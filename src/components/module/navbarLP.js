@@ -18,7 +18,7 @@ const NavbarLP = () => {
                 </NavLink>
 
                 <section className={styles['user-section']}>
-                    <NavLink to='/login'>
+                    <NavLink to='/jobseeker/login'>
                         <Button
                         type='submit'
                         className={styles['login-button']}

@@ -46,6 +46,7 @@ npm run build
 
 ## Screenshots
 <span>
+    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658497056/Peworld/landing-page_zoubgh.png">
 </span>
 
 ## Backend

@@ -16,6 +16,7 @@ const EditProfJobseeker = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [userData, setuserData] = useState('')
     const [authToken, setAuthToken] = useState('')
     const [image, setImage] = useState('http://fakeimg.pl/190x190/?text=Image')
     const [saveImg, setSaveImg] = useState(null)
