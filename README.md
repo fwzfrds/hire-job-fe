@@ -52,7 +52,7 @@ npm run build
 * [`BACKEND`](https://github.com/zeronerocode/HireJobServer)
 
 ## Deploy
-* [`Hire Job | Peworld`](https://ankasa.vercel.app/)
+* [`Hire Job | Peworld`](https://hirejob-fe.vercel.app/)
 
 
 ## Contributor
