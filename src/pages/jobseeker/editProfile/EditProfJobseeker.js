@@ -76,9 +76,8 @@ const EditProfJobseeker = () => {
     }
 
     const handleUploadChange = (e) => {
-        console.log(e.target.files[0]);
+        console.log(e.target.files[0])
         let uploaded = e.target.files[0]
-        // console.log(URL.createObjectURL(uploaded));
         setImage(URL.createObjectURL(uploaded))
         setSaveImg(uploaded)
     }
@@ -104,12 +103,6 @@ const EditProfJobseeker = () => {
 
             try {
                 dispatch(updatePersonal(formData, authToken))
-                // console.log('Update Personal Data Success!')
-                // swal({
-                //     title: "Succes",
-                //     text: `Personal Data Updated`,
-                //     icon: "success",
-                // });
             } catch (error) {
                 console.log(error.response.data.message);
                 swal({

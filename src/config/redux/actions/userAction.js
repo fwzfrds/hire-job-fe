@@ -67,7 +67,7 @@ export const login = (data, navigate) => async (dispatch) => {
         dispatch({ type: 'LOGIN_USER_PENDING' })
 
         // Post register
-        const result = await axios.post(`https://hire-job-server.herokuapp.com/v1/users/login`, data)
+        const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/users/login`, data)
         console.log(result)
         swal({
             title: "Good job!",
@@ -96,7 +96,7 @@ export const login = (data, navigate) => async (dispatch) => {
         dispatch({ type: 'LOGIN_USER_ERROR' })
         swal({
             title: "Login",
-            text: `Login Error!`,
+            text: `${error.response.data.message}`,
             icon: "error",
         });
     }
