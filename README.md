@@ -1,7 +1,7 @@
 <h1 align="center">Hire Job | Peworld</h1>
 
 <p align="center">
-  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658495119/Peworld/logo-purple_f6e7sj.png"  />
+  <img width="250" src="https://res.cloudinary.com/wazcomp/image/upload/v1658495119/Peworld/logo-purple_f6e7sj.png"  />
 </p>
 <p align="center">
   Built with React Js.
