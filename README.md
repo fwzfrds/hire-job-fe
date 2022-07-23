@@ -75,13 +75,13 @@ npm run build
       </td>
       <td align="center">
         <a href="https://github.com/brndnwjy">
-          <img width="150" src="" alt="Brandon Wijaya"><br/>
+          <img width="150" src="https://avatars.githubusercontent.com/u/68231097?v=4" alt="Brandon Wijaya"><br/>
           <b>Brandon Wijaya</b>
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/zeronerocode">
-          <img width="150" src="" alt="Akmal Fadhilah"><br/>
+          <img width="150" src="https://avatars.githubusercontent.com/u/61588546?v=4" alt="Akmal Fadhilah"><br/>
           <b>Akmal Fadhilah</b>
         </a>
       </td>
