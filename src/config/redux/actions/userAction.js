@@ -35,7 +35,7 @@ export const register = (data) => async (dispatch) => {
         dispatch({ type: 'REGIS_USER_PENDING' })
 
         // Post register
-        const result = await axios.post(`https://hire-job-server.herokuapp.com/v1/users/register`, data)
+        const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/users/register`, data)
         console.log(result)
         swal({
             title: "Good job!",
@@ -49,7 +49,7 @@ export const register = (data) => async (dispatch) => {
 
         // const users = result.data
 
-        dispatch({ type: 'REGIS_USER_SUCCESS'})
+        dispatch({ type: 'REGIS_USER_SUCCESS' })
 
     } catch (error) {
         console.log(error);
@@ -75,19 +75,26 @@ export const login = (data, navigate) => async (dispatch) => {
             icon: "success"
         });
 
-        const dataLocal = {
-            name: result.data.data.full_name,
-            id: result.data.data.id,
-            email: result.data.data.email,
-            role: result.data.data.roles,
-            token: result.data.data.token,
-            refreshToken: result.data.data.RefreshToken,
-        }
+        dispatch({ type: 'GET_DETAIL_USER_PENDING' })
+
+        const dataLocal = result.data.data
+
+        dispatch({ type: 'GET_DETAIL_USER_SUCCESS', payload: dataLocal })
+
+        dispatch({ type: 'GET_DETAIL_USER_PENDING' })
+
+        const authToken = dataLocal.token
+        const result2 = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/users/profile`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        const detailUser = result2.data.data
+
+        dispatch({ type: 'GET_DETAIL_USER_SUCCESS', payload: detailUser})
 
         console.log(dataLocal)
         localStorage.setItem('PeworldUser', JSON.stringify(dataLocal))
 
-        dispatch({ type: 'LOGIN_USER_SUCCESS'})
+        dispatch({ type: 'LOGIN_USER_SUCCESS' })
 
         navigate('/')
 
@@ -106,7 +113,7 @@ export const updatePersonal = (formData, authToken) => async (dispatch) => {
     try {
         dispatch({ type: 'UPDATE_USER_PENDING' })
 
-        const result = await axios.patch(`${process.env.REACT_APP_API_BACKEND}/v1/profile/profile`, formData, {
+        const result = await axios.put(`${process.env.REACT_APP_API_BACKEND}/v1/profile`, formData, {
             headers: { Authorization: `Bearer ${authToken}` }
         })
         console.log(result);
@@ -114,12 +121,21 @@ export const updatePersonal = (formData, authToken) => async (dispatch) => {
             title: "Good job!",
             text: `${result.data.message}`,
             icon: "success"
-        });
+        })
+
+        dispatch({ type: 'GET_DETAIL_USER_PENDING' })
+
+        const result2 = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/users/profile`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        const detailUser = result2.data.data
+
+        dispatch({ type: 'GET_DETAIL_USER_SUCCESS', payload: detailUser})
 
         const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/getuser`)
-        const products = resultGet.data
+        const users = resultGet.data
 
-        dispatch({ type: 'UPDATE_USER_SUCCESS', payload: products })
+        dispatch({ type: 'UPDATE_USER_SUCCESS', payload: users })
 
     } catch (error) {
         console.log(error);
@@ -173,7 +189,7 @@ export const addSkill = (skill, authToken, navigate) => async (dispatch) => {
     }
 }
 
-export const getUserSkill = (authToken) => async (dispatch) => {
+export const getUserSkill = (authToken, navigate) => async (dispatch) => {
     try {
         dispatch({ type: 'GET_USER_SKILL_PENDING' })
 
@@ -191,7 +207,11 @@ export const getUserSkill = (authToken) => async (dispatch) => {
             title: "Get Users Data Error",
             text: `${error.response.data.message}`,
             icon: "error",
-        });
+        })
+        if (error.response.data.message === 'token expired') {
+            localStorage.removeItem('PeworldUser')
+            navigate('/jobseeker/login')
+        }
     }
 }
 
@@ -203,7 +223,7 @@ export const deleteUserSkill = (authToken, id, skillName) => async (dispatch) =>
         await axios.delete(`${process.env.REACT_APP_API_BACKEND}/v1/profile/skill/${id}`, {
             headers: { Authorization: `Bearer ${authToken}` }
         })
-       
+
         // Get Skill yang sudah terupdate
         const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/skill`, {
             headers: { Authorization: `Bearer ${authToken}` }
@@ -271,7 +291,7 @@ export const addExperience = (experience, authToken, navigate) => async (dispatc
     }
 }
 
-export const getUserExperience = (authToken) => async (dispatch) => {
+export const getUserExperience = (authToken, navigate) => async (dispatch) => {
     try {
         dispatch({ type: 'GET_USER_EXPERIENCE_PENDING' })
 
@@ -289,7 +309,11 @@ export const getUserExperience = (authToken) => async (dispatch) => {
             title: "Get User Experience Error",
             text: `${error.response.data.message}`,
             icon: "error",
-        });
+        })
+        if (error.response.data.message === 'token expired') {
+            localStorage.removeItem('PeworldUser')
+            navigate('/jobseeker/login')
+        }
     }
 }
 
@@ -301,7 +325,7 @@ export const deleteUserExp = (authToken, id, jobdesk, corps_name) => async (disp
         await axios.delete(`${process.env.REACT_APP_API_BACKEND}/v1/profile/experience/${id}`, {
             headers: { Authorization: `Bearer ${authToken}` }
         })
-       
+
         // Get Experience yang sudah terupdate
         const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/experience`, {
             headers: { Authorization: `Bearer ${authToken}` }

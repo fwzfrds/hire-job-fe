@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ProfileJobseeker.module.css'
 import Navbar from '../../../components/module/navbar'
 import JobSeekerAva from '../../../components/base/jobseekerAva/Image'
@@ -7,11 +7,27 @@ import Footer from '../../../components/module/footer/Footer'
 import SkillTag from '../../../components/base/skillTag/SkillTag'
 import SocmedInfo from '../../../components/base/socmedInfo/SocmedInfo'
 import { Link, Outlet, NavLink } from 'react-router-dom'
+import NavbarLP from '../../../components/module/navbarLP'
 
 const ProfileJobseeker = () => {
+
+    const [userData, setUserData] = useState('')
+
+    useEffect(() => {
+        const local = localStorage.getItem('PeworldUser')
+        const localData = JSON.parse(local)
+        setUserData(localData)
+    }, [])
+
     return (
         <div className={`${styles['profile-jobseeker']}`}>
-            <Navbar />
+            {userData ?
+                <Navbar
+                    userData={userData}
+                />
+                :
+                <NavbarLP />
+            }
             <div className={`${styles['purple-bg']}`}></div>
             <div className={`${styles['profile-container']}`}>
                 <div className={`${styles['side-profile']}`}>
@@ -110,11 +126,11 @@ const ProfileJobseeker = () => {
                 </div>
                 <div className={`${styles['profile-data']}`}>
                     <div className={`${styles['nav-link']}`}>
-                        <NavLink 
+                        <NavLink
                             to={'/recruiter/jobseeker-profile/1/portfolio'}
                             className={`${styles['link']}`}
                         >Portfolio</NavLink>
-                        <NavLink 
+                        <NavLink
                             to={'/recruiter/jobseeker-profile/1/experience'}
                             className={`${styles['link']}`}
                         >Experience</NavLink>

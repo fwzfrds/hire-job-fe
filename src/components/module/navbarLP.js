@@ -25,7 +25,7 @@ const NavbarLP = () => {
                         style={{
                             fontWeight: '700'
                         }}
-                        onClick=''
+                        // onClick=''
                         value=''
                         title='Masuk'
                         />
@@ -38,7 +38,7 @@ const NavbarLP = () => {
                         style={{
                             fontWeight: '700'
                         }}
-                        onClick=''
+                        // onClick=''
                         value=''
                         title='Daftar'
                         />

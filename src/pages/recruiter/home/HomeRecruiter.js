@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/base/loading/Loading'
 import Navbar from '../../../components/module/navbar'
 import Searchbar from '../../../components/module/searchbar'
+import NavbarLP from '../../../components/module/navbarLP'
 
 const HomeRecruiter = () => {
 
@@ -19,6 +20,14 @@ const HomeRecruiter = () => {
 
     console.log(users)
     console.log(Object.keys(users).length)
+
+    const [userData, setUserData] = useState('')
+
+    useEffect(() => {
+        const local = localStorage.getItem('PeworldUser')
+        const localData = JSON.parse(local)
+        setUserData(localData)
+    }, [])
 
     return (
         <div className={`${styles['home-container']}`}>
@@ -35,7 +44,13 @@ const HomeRecruiter = () => {
             >
                 Navbar
             </nav> */}
-            <Navbar />
+            {userData ?
+                <Navbar
+                    userData={userData}
+                />
+                :
+                <NavbarLP />
+            }
             <div className={`${styles.header}`}>
                 <h3 className={`${styles['header-title']}`}>Home</h3>
             </div>
@@ -64,27 +79,27 @@ const HomeRecruiter = () => {
             </div>
             {/* <Loading /> */}
             <div
-                style={{ 
+                style={{
                     marginLeft: 100,
-                 }}
+                }}
             >
-            {Object.keys(users).length === 2 ? <Loading /> : new Array(users.pagination.totalPage).fill().map((item, index) =>
-                        <button
-                            // onClick={() => handlePage(index + 1)}
-                            // text={index + 1}
-                            key={index}
-                            style={{ 
-                                marginRight: 20,
-                                border: 'none',
-                                borderRadius: 5,
-                                background: '#5E50A1',
-                                padding: 10,
-                                color: '#FFF',
-                                fontWeight: 600
-                             }}
-                        >
-                            {index + 1}
-                        </button>)}
+                {Object.keys(users).length === 2 ? <Loading /> : new Array(users.pagination.totalPage).fill().map((item, index) =>
+                    <button
+                        // onClick={() => handlePage(index + 1)}
+                        // text={index + 1}
+                        key={index}
+                        style={{
+                            marginRight: 20,
+                            border: 'none',
+                            borderRadius: 5,
+                            background: '#5E50A1',
+                            padding: 10,
+                            color: '#FFF',
+                            fontWeight: 600
+                        }}
+                    >
+                        {index + 1}
+                    </button>)}
             </div>
 
 
