@@ -11,34 +11,31 @@ import { useNavigate } from 'react-router-dom'
 import { addSkill, getUserSkill, deleteUserSkill, addExperience, deleteUserExp, getUserExperience, updatePersonal } from '../../../config/redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/base/loading/Loading'
+import NavbarLP from '../../../components/module/navbarLP'
 
 const EditProfJobseeker = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [userData, setuserData] = useState('')
+    const [userData, setUserData] = useState('')
     const [authToken, setAuthToken] = useState('')
-    const [image, setImage] = useState('http://fakeimg.pl/190x190/?text=Image')
-    const [saveImg, setSaveImg] = useState(null)
+    const [image, setImage] = useState('')
+    const [saveImg, setSaveImg] = useState('')
     const target = useRef(null)
     const handleClickUpload = () => {
-        console.log(target.current)
+        // console.log(target.current)
         target.current.click()
-      }
+    }
 
     // State from redux
     const { isLoading, userSkill } = useSelector((state) => state.userSkill)
+    const { detailUser } = useSelector((state) => state.userDetail)
+    console.log(detailUser)
 
     const { isLoading: isLoadingExp, userExperience } = useSelector((state) => state.userExperience)
 
     // Local state for submit
-    const [personalData, setPersonalData] = useState({
-        full_name: '',
-        jobdesk: '',
-        address: '',
-        workplace: '',
-        description: '',
-    })
+    const [personalData, setPersonalData] = useState('')
 
     const [skill, setSkill] = useState({
         skillName: ''
@@ -54,20 +51,22 @@ const EditProfJobseeker = () => {
     // Use Effect
     useEffect(() => {
         const dataFromLocal = JSON.parse(localStorage.getItem('PeworldUser'))
+        setUserData(detailUser)
         setAuthToken(dataFromLocal.token)
+        setImage(detailUser.photo)
     }, []);
 
     useEffect(() => {
         if (authToken) {
-            dispatch(getUserSkill(authToken))
+            dispatch(getUserSkill(authToken, navigate))
         }
-    }, [authToken, dispatch])
+    }, [authToken, dispatch, navigate])
 
     useEffect(() => {
         if (authToken) {
-            dispatch(getUserExperience(authToken))
+            dispatch(getUserExperience(authToken, navigate))
         }
-    }, [authToken, dispatch])
+    }, [authToken, dispatch, navigate])
 
     // Personal Data Handling
     const handleDataInput = (e) => {
@@ -77,42 +76,43 @@ const EditProfJobseeker = () => {
     }
 
     const handleUploadChange = (e) => {
-        console.log(e.target.files[0])
+        // console.log(e.target.files[0])
         let uploaded = e.target.files[0]
         setImage(URL.createObjectURL(uploaded))
         setSaveImg(uploaded)
     }
 
+    const cancelChangePhoto = () => {
+        setSaveImg('')
+        setImage('')
+    }
+
     const handleSubmitPersonal = async (e) => {
         e.preventDefault()
 
-        if (!saveImg) {
+        let formData = new FormData()
+        if (saveImg) {
+            formData.append('photo', saveImg)
+        }
+        
+        if (Object.keys(personalData).length > 0) {
+            const data = personalData
+            Object.keys(personalData).forEach((item) => {
+                formData.append(item, data[item])
+            })
+        }
+
+        try {
+            dispatch(updatePersonal(formData, authToken))
+        } catch (error) {
+            console.log(error.response.data.message);
             swal({
-                title: "Good job!",
-                text: 'Upload Gambar Dulu',
+                title: "Add Personal Data Error!",
+                text: `${error.response.data.message}`,
                 icon: "error",
             });
-        } else {
-            let formData = new FormData()
-            formData.append('photo', saveImg)
-
-            formData.append('full_name', personalData.full_name)
-            formData.append('jobdesk', personalData.jobdesk)
-            formData.append('address', personalData.address)
-            formData.append('workplace', personalData.workplace)
-            formData.append('description', personalData.description)
-
-            try {
-                dispatch(updatePersonal(formData, authToken))
-            } catch (error) {
-                console.log(error.response.data.message);
-                swal({
-                    title: "Add Personal Data Error!",
-                    text: `${error.response.data.message}`,
-                    icon: "error",
-                });
-            }
         }
+
     }
     // Personal Data Handling End
 
@@ -179,17 +179,23 @@ const EditProfJobseeker = () => {
     // Experience handling End
 
     console.log(personalData)
+    console.log(saveImg)
+    // console.log(userData)
 
     return (
         <div className={`${styles['profile-jobseeker']}`}>
-            <Navbar
-
-            />
+            {userData ?
+                <Navbar
+                    userData={userData}
+                />
+                :
+                <NavbarLP />
+            }
             <div className={`${styles['purple-bg']}`}></div>
             <div className={`${styles['profile-container']}`}>
                 <div className={`${styles['side-profile']}`}>
                     <JobSeekerAva
-                        source={image}
+                        source={image ? image : '/assets/img/photo.webp'}
                         style={{
                             width: 150,
                             height: 150,
@@ -198,7 +204,17 @@ const EditProfJobseeker = () => {
                             alignSelf: 'center'
                         }}
                     />
-                    {/* <img src={image} alt="" /> */}
+                    {saveImg &&
+                        <p
+                            style={{
+                                margin: 0,
+                                marginTop: 10,
+                                cursor: 'pointer'
+                            }}
+                            onClick={cancelChangePhoto}
+                        >x cancel change</p>
+                    }
+
                     <input
                         style={{
                             display: 'none'
@@ -209,19 +225,22 @@ const EditProfJobseeker = () => {
                         onChange={handleUploadChange}
                     />
                     <Button
-                        title={`Edit`}
+                        title={`Change Photo`}
                         type={'button'}
                         style={{
-                            
+                            borderRadius: 5,
+                            border: 'none',
+                            marginTop: 15,
+                            marginBottom: 20
                         }}
                         onClick={handleClickUpload}
                     />
                     <div className={`${styles['about-profile']}`}>
-                        <h3 className={`${styles.name}`}>Louis Tomlinson</h3>
-                        <h6 className={`${styles.position}`}>Web Developer</h6>
+                        <h3 className={`${styles.name}`}>{userData.full_name ? userData.full_name : 'My Name'}</h3>
+                        <h6 className={`${styles.position}`}>{userData ? userData.jobdesk : 'Web Developer'}</h6>
                         <div className={`${styles.location}`}>
                             <img src="/assets/img/icons/map-pin.png" alt="" />
-                            <p className={`${styles['text-location']}`}>Purwokerto, Jawa Tengah</p>
+                            <p className={`${styles['text-location']}`}>{userData.address ? userData.address : 'Indonesia'}</p>
                         </div>
                         <p className={`${styles.status}`}>Freelancer</p>
                     </div>
@@ -265,7 +284,7 @@ const EditProfJobseeker = () => {
                         <div className={`${styles['input-group']}`}>
                             <label htmlFor="">Nama Lengkap</label>
                             <Input
-                                placeholder={'Masukkan nama lengkap'}
+                                placeholder={userData.full_name ? userData.full_name : 'Masukkan nama lengkap'}
                                 style={{
                                     height: 40,
                                     paddingLeft: 15,
@@ -279,7 +298,7 @@ const EditProfJobseeker = () => {
                         <div className={`${styles['input-group']}`}>
                             <label htmlFor="">Job desk</label>
                             <Input
-                                placeholder={'Masukkan job desk'}
+                                placeholder={userData.jobdesk ? userData.jobdesk : 'Masukkan job desk'}
                                 style={{
                                     height: 40,
                                     paddingLeft: 15,
@@ -293,7 +312,7 @@ const EditProfJobseeker = () => {
                         <div className={`${styles['input-group']}`}>
                             <label htmlFor="">Domisili</label>
                             <Input
-                                placeholder={'Masukkan alamat domisili'}
+                                placeholder={userData.address ? userData.address : 'Masukkan alamat domisili'}
                                 style={{
                                     height: 40,
                                     paddingLeft: 15,
@@ -307,7 +326,7 @@ const EditProfJobseeker = () => {
                         <div className={`${styles['input-group']}`}>
                             <label htmlFor="">Tempat Kerja</label>
                             <Input
-                                placeholder={'Masukkan tempat kerja'}
+                                placeholder={userData.workplace ? userData.workplace : 'Masukkan tempat kerja'}
                                 style={{
                                     height: 40,
                                     paddingLeft: 15,
@@ -320,6 +339,7 @@ const EditProfJobseeker = () => {
                         </div>
                         <div className={`${styles['input-group']}`}>
                             <Textarea
+                                placeholder={userData.description ? userData.description : 'Masukkan deskripsi singkat tentang anda'}
                                 labelName={'Deskripsi Singkat'}
                                 id={'personal'}
                                 name={`description`}

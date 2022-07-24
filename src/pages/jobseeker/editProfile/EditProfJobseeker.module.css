@@ -44,6 +44,12 @@
     margin-top: 0px;
 }
 
+.about-profile h3 {
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
 .location {
     display: flex;
     align-items: center;
@@ -90,6 +96,10 @@
     margin-bottom: 20px;
 }
 
+.input-group input::placeholder{
+    color: #000;
+}
+
 .input-group.input-skill {
     flex-direction: row;
     align-items: center !important;
@@ -127,6 +137,10 @@
 
 .input-group input:focus {
     outline: 2px solid rgba(94, 80, 161, 1);
+}
+
+.input-group textarea::placeholder {
+    color: #000;
 }
 
 .double-input-group {
