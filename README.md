@@ -46,7 +46,10 @@ npm run build
 
 ## Screenshots
 <span>
-    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658497056/Peworld/landing-page_zoubgh.png">
+    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658659651/Peworld/landing-page_c9vwe0.png">
+    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658659648/Peworld/profile_kiqm1f.png">
+    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658659650/Peworld/register_qctwsy.png">
+    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658659649/Peworld/login_tjmz0f.png">
 </span>
 
 ## Backend

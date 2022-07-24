@@ -237,7 +237,7 @@ const EditProfJobseeker = () => {
                     />
                     <div className={`${styles['about-profile']}`}>
                         <h3 className={`${styles.name}`}>{userData.full_name ? userData.full_name : 'My Name'}</h3>
-                        <h6 className={`${styles.position}`}>Web Developer</h6>
+                        <h6 className={`${styles.position}`}>{userData ? userData.jobdesk : 'Web Developer'}</h6>
                         <div className={`${styles.location}`}>
                             <img src="/assets/img/icons/map-pin.png" alt="" />
                             <p className={`${styles['text-location']}`}>{userData.address ? userData.address : 'Indonesia'}</p>

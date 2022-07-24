@@ -34,7 +34,7 @@ const Navbar = ({ userData }) => {
                                 style={{ 
                                     borderRadius: '50%'
                                  }}
-                                src={'/assets/img/photo.webp'} alt='user' />
+                                src={userData.photo ? userData.photo : '/assets/img/photo.webp'} alt='user' />
                         </NavLink>
                     </section>
                 </div>
