@@ -259,3 +259,73 @@ export const userExperienceReducer = (state = initialState4, action) => {
 
 }
 
+const initialState5 = {
+    userPortfolio: {
+        portfolio: ''
+    },
+    isLoading: false
+}
+
+export const userPortfolioReducer = (state = initialState5, action) => {
+
+    switch (action.type) {
+        // ADD USER EXPERIENCE
+        case 'ADD_USER_PORTFOLIO_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'ADD_USER_PORTFOLIO_SUCCESS':
+            return {
+                ...state,
+                userPortfolio: action.payload,
+                isLoading: false
+            }
+        case 'ADD_USER_PORTFOLIO_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        // Get USER EXPERIENCE
+        case 'GET_USER_PORTFOLIO_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'GET_USER_PORTFOLIO_SUCCESS':
+            return {
+                ...state,
+                userPortfolio: action.payload,
+                isLoading: false
+            }
+        case 'GET_USER_PORTFOLIO_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        // Get USER EXPERIENCE
+        case 'DELETE_USER_PORTFOLIO_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'DELETE_USER_PORTFOLIO_SUCCESS':
+            return {
+                ...state,
+                userPortfolio: action.payload,
+                isLoading: false
+            }
+        case 'DELETE_USER_PORTFOLIO_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        default:
+            return state
+    }
+
+}
+

@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import { userReducer, userDetailReducer, userSkillReducer, userExperienceReducer } from './userReducer'
+import { userReducer, userDetailReducer, userSkillReducer, userExperienceReducer, userPortfolioReducer } from './userReducer'
 import recruiterReducer from './recruiterReducers'
 // import adminReducer from './adminReducer'
 // import { productsReducer, detailProdReducer } from './productsReducer'
@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
     userDetail: userDetailReducer,
     userSkill: userSkillReducer,
     userExperience: userExperienceReducer,
+    userPortfolio: userPortfolioReducer
     // admin: adminReducer,
     // products: productsReducer,
     // productDetail: detailProdReducer
