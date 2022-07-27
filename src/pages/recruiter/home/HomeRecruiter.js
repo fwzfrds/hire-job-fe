@@ -68,6 +68,7 @@ const HomeRecruiter = () => {
                                 location={user.address ? user.address : 'Indonesia'}
                                 name={user.full_name}
                                 img={user.photo}
+                                idJobseeker={user.id}
                             />
                         </React.Fragment>
                     )

@@ -71,7 +71,7 @@ export const login = (data, navigate) => async (dispatch) => {
         console.log(result)
         swal({
             title: "Good job!",
-            text: `Registration Success`,
+            text: `Login Success`,
             icon: "success"
         });
 

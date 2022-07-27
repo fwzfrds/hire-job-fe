@@ -1,5 +1,6 @@
 .experience {
     /* border: 1px solid black; */
+    position: relative;
 }
 
 .exp-container {
@@ -11,11 +12,13 @@
 .img-container {
     width: 75px;
     height: 75px;
+    position: relative;
 }
 
 .img-container img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
 }
 
 .exp-data {

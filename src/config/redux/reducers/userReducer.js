@@ -261,7 +261,7 @@ export const userExperienceReducer = (state = initialState4, action) => {
 
 const initialState5 = {
     userPortfolio: {
-        portfolio: ''
+        portfolio: []
     },
     isLoading: false
 }

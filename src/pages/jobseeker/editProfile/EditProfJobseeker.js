@@ -574,9 +574,9 @@ const EditProfJobseeker = () => {
                     <form className={`${styles['portfolio']}`}>
                         <h4>Portfolio</h4>
                         <hr />
-                        {userPortfolio && userPortfolio.map((porto, idx) => {
+                        {userPortfolio.length > 0 && userPortfolio.map((porto, idx) => {
                             return (
-                                <div className={`${styles.porto_list}`}>
+                                <div key={idx} className={`${styles.porto_list}`}>
                                     <p>{porto.app_name}</p>
 
                                     <div>
