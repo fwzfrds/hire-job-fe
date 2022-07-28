@@ -20,12 +20,15 @@ const LandingPage = () => {
 
     useEffect(() => {
         let local
+        let localData
         if(localStorage.getItem('PeworldUser')) {
             local = localStorage.getItem('PeworldUser')
+            localData = JSON.parse(local)
+
         } else if (localStorage.getItem('PeworldAdmin')) {
             local = localStorage.getItem('PeworldAdmin')
+            localData = JSON.parse(local)
         }
-        const localData = JSON.parse(local)
         setUserData(localData)
     }, [])
 
