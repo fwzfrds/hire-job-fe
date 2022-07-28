@@ -34,6 +34,8 @@ const HomeRecruiter = () => {
         setUserData(localData)
     }, [])
 
+    console.log(userData)
+
     return (
         <div className={`${styles['home-container']}`}>
             {/* <nav

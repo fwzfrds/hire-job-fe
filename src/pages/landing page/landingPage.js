@@ -19,7 +19,12 @@ const LandingPage = () => {
     const [userData, setUserData] = useState('')
 
     useEffect(() => {
-        const local = localStorage.getItem('PeworldUser')
+        let local
+        if(localStorage.getItem('PeworldUser')) {
+            local = localStorage.getItem('PeworldUser')
+        } else if (localStorage.getItem('PeworldAdmin')) {
+            local = localStorage.getItem('PeworldAdmin')
+        }
         const localData = JSON.parse(local)
         setUserData(localData)
     }, [])

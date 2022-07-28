@@ -80,7 +80,7 @@ const Navbar = ({ userData }) => {
                         </NavLink>
 
                         <NavLink to={'#'} id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" >
-                            {/* <NavLink to={userData.roles === 'user' ? `/jobseeker/edit/${userData.id}` : '/profile'} id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" > */}
+                            {/* <NavLink to={userData.role === 'user' ? `/jobseeker/edit/${userData.id}` : '/profile'} id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false" > */}
                             <img
                                 style={{
                                     borderRadius: '50%'
@@ -90,7 +90,7 @@ const Navbar = ({ userData }) => {
 
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <li>
-                                <NavLink to={userData.roles === 'user' ? `/jobseeker/edit/${userData.id}` : '/profile'}
+                                <NavLink to={userData.role === 'user' ? `/jobseeker/edit/${userData.id}` : '/profile'}
                                     style={{
                                         textDecoration: 'none',
                                         fontWeight: 600
