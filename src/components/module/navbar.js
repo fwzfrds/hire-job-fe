@@ -9,7 +9,7 @@ import swal from 'sweetalert';
 import logo from './logo.png'
 import notif from './notif.png'
 import mail from './mail.png'
-import user from './user.png'
+// import user from './user.png'
 
 const Navbar = ({ userData }) => {
 
