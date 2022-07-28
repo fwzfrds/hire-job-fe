@@ -23,8 +23,10 @@ const Hiring = () => {
 
   useEffect(() => {
     const local = localStorage.getItem('PeworldAdmin')
-    const localData = JSON.parse(local)
-    setUserData(localData)
+    if (local) {
+      const localData = JSON.parse(local)
+      setUserData(localData)
+    }
   }, [])
 
   useEffect(() => {

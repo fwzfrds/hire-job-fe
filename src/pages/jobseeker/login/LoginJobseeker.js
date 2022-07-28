@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../../components/base/logo/Logo'
 import Banner from '../../../components/module/banner/Banner'
 import styles from './LoginJobseeker.module.css'
-import {login} from '../../../config/redux/actions/userAction'
+import { login } from '../../../config/redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import ValidMessage from '../../../components/base/validation/ValidMessage';
 import swal from 'sweetalert'
@@ -88,7 +88,14 @@ const LoginJobSeeker = () => {
       <div className={`${styles['login-form']}`}>
         <div className={`${styles.greeting}`}>
           <h3 className={`${styles.title}`}>Hallo, Pewpeople</h3>
-          <p className={`${styles.text}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.</p>
+          <p className={`${styles.text}`}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In euismod ipsum et dui rhoncus auctor.
+          </p>
+          <p style={{ 
+            marginTop: 20
+           }}>
+            You are an admin ? Please Login Here <Link to={'/recruiter/login'}>Admin</Link>
+          </p>
         </div>
         <div className={`${styles['greeting-mobile']}`}>
           <h3 className={`${styles.title}`}>Login</h3>
