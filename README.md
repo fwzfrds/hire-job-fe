@@ -3,7 +3,7 @@
 
   <h3 align="center">Hire Job | Peworld</h3>
   <p align="center">
-    <image align="center" width="100" src='https://res.cloudinary.com/wazcomp/image/upload/v1658495119/Peworld/logo-purple_f6e7sj.png' />
+    <image align="center" width="200" src='https://res.cloudinary.com/wazcomp/image/upload/v1658495119/Peworld/logo-purple_f6e7sj.png' />
   </p>
 
   <p align="center">
