@@ -1,17 +1,53 @@
-<h1 align="center">Hire Job | Peworld</h1>
-
+<br />
 <p align="center">
-  <img width="250" src="https://res.cloudinary.com/wazcomp/image/upload/v1658495119/Peworld/logo-purple_f6e7sj.png"  />
-</p>
-<p align="center">
-  Built with React Js.
+
+  <h3 align="center">Hire Job | Peworld</h3>
+  <p align="center">
+    <image align="center" width="100" src='https://res.cloudinary.com/wazcomp/image/upload/v1658495119/Peworld/logo-purple_f6e7sj.png' />
+  </p>
+
+  <p align="center">
+    <br />
+    <a href="https://github.com/fwzfrds/hire-job-fe"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://hirejob-fe-fwzfrds.vercel.app/">View Demo</a>
+  </p>
 </p>
 
-## About
-Hire Job | Peworld is a website that provides talents in IT for companies who are looking for them. Created by Nocturnal team. Built with React JS, Express JS, and Postgree SQL.
 
-## Dependencies
-- [React Js](https://(https://reactjs.org)/)
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+  * [Packages / Dependencies](#dependencies)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Related Project](#related-project)
+* [Screenshot](#screenshot)
+* [Contact](#contact)
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+Hire Job | Peworld is a website that provides talents in IT for companies who are looking for them. Created by Nocturnal team. Built with React JS, Express JS, Postgre SQL, Nodemailer as as module for sending email, and Cloudinary as cloud services for uploading images.
+This Application use Rest API server from [hirejob-api](https://hire-job-server.herokuapp.com)
+
+### Built With
+
+* [Node JS](https://nodejs.org/en/docs/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [React Js](https://reactjs.org)
+* [Nodemailer](https://nodemailer.com/about/)
+* [Cloudinary](https://cloudinary.com/)
+
+### Dependencies
+- [React Js](https://reactjs.org)
 - [Axios](https://www.npmjs.com/package/axios)
 - [Bootstrap](https://www.npmjs.com/package/bootstrap)
 - [Sweetalert](https://www.npmjs.com/package/sweetalert)
@@ -21,45 +57,68 @@ Hire Job | Peworld is a website that provides talents in IT for companies who ar
 - [Redux-logger](https://www.npmjs.com/package/redux-logger)
 - [Redux-thunk](https://www.npmjs.com/search?q=redux-thunk)
 
+<!-- GETTING STARTED -->
+## Getting Started
 
-## How To Install
+### Prerequisites
 
-- Clone
-```
+This is an example of how to list things you need to use the software and how to install them.
+
+* [nodejs](https://nodejs.org/en/download/)
+
+### Installation
+
+1. Clone the repo
+```sh
 git clone https://github.com/fwzfrds/hire-job-fe.git
 ```
-
-- Install Module
-```
+2. Install NPM packages
+```sh
 npm install
 ```
+3. Add .env file at root folder project, and add following
+```sh
+REACT_APP_API_BACKEND = https://hire-job-server.herokuapp.com // or use your own
 
-- Run Project
-```
-npm run start
-```
-
-### Build Project
-```
-npm run build
 ```
 
-## Screenshots
-<span>
-    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658659651/Peworld/landing-page_c9vwe0.png">
-    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658659648/Peworld/profile_kiqm1f.png">
-    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658659650/Peworld/register_qctwsy.png">
-    <img width="415" height="197" src="https://res.cloudinary.com/wazcomp/image/upload/v1658659649/Peworld/login_tjmz0f.png">
-</span>
+<!-- CONTRIBUTING -->
+## Contributing
 
-## Backend
-* [`BACKEND`](https://github.com/zeronerocode/HireJobServer)
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Deploy
-* [`Hire Job | Peworld`](https://hirejob-fe.vercel.app/)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b your/branch`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/yourbranch`)
+5. Open a Pull Request
+
+<!-- SCREENSHOT -->
+## Screenshot
+| Login Page | Register Page |
+| ------------- | ------------- |
+| ![Login](/public/assets/img/screenshot/login.png?raw=true "Login Page") | ![Register](/public/assets/img/screenshot/register.png?raw=true "Register Page")|
+
+| Landing Page  | Product Detail Page |
+| ------------- | ------------- |
+| ![Landing](/public/assets/img/screenshot/landing-page.png?raw=true "Landing Page") | ![Jobseeker Detail](/public/assets/img/screenshot/jobseeker-detail.png?raw=true "Jobseeker Detail Page") |
+
+| Profile Page | Add Product Page |
+| ------------- | ------------- |
+| ![Profile](/public/assets/img/screenshot/profile.png?raw=true "Profile Page") | ![Offering](/public/assets/img/screenshot/offering.png?raw=true "Offering Page") |
+
+| Cart Page | Checkout Page |
+| ------------- | ------------- |
+| ![Home Recruiter](/public/assets/img/screenshot/recruiter-home.png?raw=true "Recruiter Home Page") | ![Hire](/public/assets/img/screenshot/hire.png?raw=true "Hiring Page") |
 
 
-## Contributor
+<!-- RELATED PROJECT -->
+## Related Project
+* [`Hire Job Web Demo`](https://hirejob-fe.vercel.app/)
+* [`Hire JOb Rest API URL`](https://hire-job-server.herokuapp.com)
+* [`Hire Job Rest API Repository`](https://github.com/zeronerocode/HireJobServer)
+
+## Developer
 
 <center>
   <table>

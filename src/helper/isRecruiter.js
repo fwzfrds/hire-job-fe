@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import swal from 'sweetalert'
 
 const AuthRecruiter = ({children}) => {
-  const isAuth = localStorage.getItem('PeworldRecruiter')
+  const isAuth = localStorage.getItem('PeworldAdmin')
   if (!isAuth){
     swal({
         title: "Access!",

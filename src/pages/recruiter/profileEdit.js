@@ -19,9 +19,11 @@ const ProfileEdit = () => {
     const [userData, setUserData] = useState('')
 
     useEffect(() => {
-        const local = localStorage.getItem('PeworldUser')
-        const localData = JSON.parse(local)
-        setUserData(localData)
+        const local = localStorage.getItem('Peworldadmin')
+        if (local) {
+            const localData = JSON.parse(local)
+            setUserData(localData)
+        }
     }, [])
 
     return (

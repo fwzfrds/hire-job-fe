@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginJobSeeker from '../../pages/jobseeker/login/LoginJobseeker'
 import RegisterJobseeker from '../../pages/jobseeker/register/RegisterJobseeker'
 import RegisterRecruiter from '../../pages/recruiter/register/RegisterRecruiter'
-import Main from '../../pages/main/Main'
+// import Main from '../../pages/main/Main'
 import Page404 from '../../pages/page404/Page404'
 import LoginRecruiter from '../../pages/recruiter/login/LoginRecruiter'
 import HomeRecruiter from '../../pages/recruiter/home/HomeRecruiter'
@@ -50,7 +50,7 @@ const Routers = () => {
         {/* Dari Jaey */}
         <Route path='/profile' element={<Profile />} />
         <Route path='/profile-edit' element={<ProfileEdit />} />
-        <Route path='/hiring' element={<Hiring />} />
+        <Route path='/hire/:id' element={<Hiring />} />
         <Route path='/notification' element={<Notification />} />
         <Route path='/test' element={<Testing />} />
 

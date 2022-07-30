@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../../components/base/logo/Logo'
 import Banner from '../../../components/module/banner/Banner'
@@ -13,15 +13,84 @@ const LoginRecruiter = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isLoading } = useSelector((state) => state.users)
-  
+
   const [loginData, setLoginData] = useState({
-    email: '',
-    password: '',
-  })
-  const [isInputValid, setIsInputValid] = useState({
     email: '',
     password: ''
   })
+  const [isLoginError, setIsLoginError] = useState('')
+  const [buttonDisable, setButtonDisable] = useState(false)
+  const [formErrors, setFormErrors] = useState({})
+  const [isSubmit, setIsSubmit] = useState(false)
+
+  const handleInputLogin = (e) => {
+    e.persist()
+    setLoginData({ ...loginData, [e.target.name]: e.target.value })
+  }
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setFormErrors(validate(loginData))
+    setIsSubmit(true)
+  }
+
+  useEffect(() => {
+
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+
+      const sendLogin = async () => {
+        // try {
+
+        setButtonDisable(true)
+        dispatch(login(loginData, navigate)).then(() => {
+          setButtonDisable(false)
+        }).catch((error) => {
+          console.log(error)
+          setIsLoginError(error.response.data.message)
+          setButtonDisable(false)
+          return swal({
+            title: "Warning",
+            text: `${error.response.data.message}`,
+            icon: "warning"
+          });
+        })
+
+        // } catch (error) {
+        //     console.log(error)
+        //     setIsLoginError(error.response.data.message)
+        //     setButtonDisable(false)
+        //     return swal({
+        //         title: "Warning",
+        //         text: `${error.response.data.message}`,
+        //         icon: "warning"
+        //     });
+        // }
+      }
+
+      sendLogin()
+    }
+  }, [formErrors])
+
+  const validate = (values) => {
+    const errors = {}
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+
+    if (!values.email) {
+      errors.email = 'email is required!'
+    } else if (!regEx.test(values.email)) {
+      errors.email = 'email is invalid!'
+    }
+
+    if (!values.password) {
+      errors.password = 'password is required!'
+    } else if ((values.password).length < 8) {
+      errors.password = 'password must be more than 8 characters!'
+    }
+
+    return errors
+  }
+
+  console.log(loginData)
 
   return (
     <div className={`${styles['login-container']}`}>
@@ -51,17 +120,31 @@ const LoginRecruiter = () => {
           <h3 className={`${styles.title}`}>Login</h3>
           <p className={`${styles.text}`}>Lorom ipsum dolor si amet uegas anet.</p>
         </div>
-        <form className={`${styles['input-form']}`}>
+        <form onSubmit={handleLogin} className={`${styles['input-form']}`}>
           <div className={`${styles['input-container']}`}>
-            <label htmlFor="">Email</label>
-            <input type="email" placeholder='Masukkan alamat email' />
+            <label htmlFor="email">Email</label>
+            <input
+              type="email" id='email' name='email'
+              placeholder='Masukkan alamat email'
+              onChange={handleInputLogin}
+            />
           </div>
           <div className={`${styles['input-container']}`}>
-            <label htmlFor="">Kata Sandi</label>
-            <input type="password" placeholder='Masukkan kata sandi' />
+            <label htmlFor="password">Kata Sandi</label>
+            <input
+              type="password" id='password' name='password'
+              placeholder='Masukkan kata sandi'
+              onChange={handleInputLogin}
+            />
           </div>
           <Link to='/recruiter/reset-password' className={`${styles['forgot-password']}`}>Lupa kata sandi?</Link>
-          <button className={`${styles['login-button']}`}>Masuk</button>
+          <button className={`${styles['login-button']}`}
+            // text={buttonDisable ? 'Loading...' : 'Login'}
+            type={'submit'}
+            style={buttonDisable ? { pointerEvents: 'none' } : {}}
+          >
+            {buttonDisable ? 'Loading...' : 'Login'}
+          </button>
           <p>Anda belum punya akun? <Link to='/recruiter/register' className={`${styles['signup-here']}`}>Daftar disini</Link></p>
         </form>
       </div>

@@ -71,7 +71,7 @@ export const login = (data, navigate) => async (dispatch) => {
         console.log(result)
         swal({
             title: "Good job!",
-            text: `Registration Success`,
+            text: `Login Success`,
             icon: "success"
         });
 
@@ -346,6 +346,108 @@ export const deleteUserExp = (authToken, id, jobdesk, corps_name) => async (disp
         dispatch({ type: 'DELETE_USER_EXPERIENCE_ERROR' })
         swal({
             title: `Delete Experience at ${corps_name} as ${jobdesk} Error`,
+            text: `${error.response.data.message}`,
+            icon: "error",
+        });
+    }
+}
+
+export const addPortfolio = (formData, authToken, navigate) => async (dispatch) => {
+    try {
+        dispatch({ type: 'ADD_USER_PORTFOLIO_PENDING' })
+
+        // Post Add Porto
+        await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/profile/portofolio`, formData, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        // console.log(result1)
+
+        // Get Porto yang sudah terupdate
+        const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/portofolio`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        // console.log(resultGet.data.data)
+        const portfolio = resultGet.data.data
+
+        swal({
+            title: "Good job!",
+            text: `Add New Portfolio Success`,
+            icon: "success"
+        });
+
+        dispatch({ type: 'ADD_USER_PORTFOLIO_SUCCESS', payload: portfolio })
+
+    } catch (error) {
+        console.log(error);
+        const errMesage = error.response.data.message
+        dispatch({ type: 'ADD_USER_PORTFOLIO_ERROR' })
+        swal({
+            title: "Error!",
+            text: errMesage === 'token expired' ? errMesage + ' please login' : errMesage,
+            icon: "error",
+        });
+        if (errMesage === 'token expired') {
+            localStorage.removeItem('PeworldUser')
+            navigate('/jobseeker/login')
+        }
+    }
+}
+
+export const getUserPortfolio = (authToken, navigate) => async (dispatch) => {
+    try {
+        dispatch({ type: 'GET_USER_PORTFOLIO_PENDING' })
+
+        const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/portofolio`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        const portfolio = result.data.data
+
+        dispatch({ type: 'GET_USER_PORTFOLIO_SUCCESS', payload: portfolio })
+
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: 'GET_USER_PORTFOLIO_ERROR' })
+        swal({
+            title: "Get User Portfolio Error",
+            text: `${error.response.data.message}`,
+            icon: "error",
+        })
+        if (error.response.data.message === 'token expired') {
+            localStorage.removeItem('PeworldUser')
+            navigate('/jobseeker/login')
+        }
+    }
+}
+
+export const delUserPorto = (authToken, id, name) => async (dispatch) => {
+    try {
+        dispatch({ type: 'DELETE_USER_PORTFOLIO_PENDING' })
+
+        // Delete User Experience
+        await axios.delete(`${process.env.REACT_APP_API_BACKEND}/v1/profile/portofolio/${id}`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+
+        // Get Experience yang sudah terupdate
+        const resultGet = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/profile/portofolio`, {
+            headers: { Authorization: `Bearer ${authToken}` }
+        })
+        console.log(resultGet.data.data)
+        const portfolio = resultGet.data.data
+
+        dispatch({ type: 'DELETE_USER_PORTFOLIO_SUCCESS', payload: portfolio })
+
+        swal({
+            title: 'Success',
+            text: `Delete ${name} portfolio success`,
+            icon: 'success'
+        })
+
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: 'DELETE_USER_PORTFOLIO_ERROR' })
+        swal({
+            title: `Delete ${name} portfolio Error`,
             text: `${error.response.data.message}`,
             icon: "error",
         });

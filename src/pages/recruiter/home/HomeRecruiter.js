@@ -24,10 +24,20 @@ const HomeRecruiter = () => {
     const [userData, setUserData] = useState('')
 
     useEffect(() => {
-        const local = localStorage.getItem('PeworldUser')
-        const localData = JSON.parse(local)
+        let local
+        let localData
+
+        if(localStorage.getItem('PeworldUser')) {
+            local = localStorage.getItem('PeworldUser')
+            localData = JSON.parse(local)
+        } else if (localStorage.getItem('PeworldAdmin')) {
+            local = localStorage.getItem('PeworldAdmin')
+            localData = JSON.parse(local)
+        }
         setUserData(localData)
     }, [])
+
+    console.log(userData)
 
     return (
         <div className={`${styles['home-container']}`}>
@@ -68,6 +78,7 @@ const HomeRecruiter = () => {
                                 location={user.address ? user.address : 'Indonesia'}
                                 name={user.full_name}
                                 img={user.photo}
+                                idJobseeker={user.id}
                             />
                         </React.Fragment>
                     )

@@ -8,10 +8,12 @@ import Input from '../../../components/base/input'
 import Textarea from '../../../components/base/textarea/Textarea'
 import swal from 'sweetalert'
 import { useNavigate } from 'react-router-dom'
-import { addSkill, getUserSkill, deleteUserSkill, addExperience, deleteUserExp, getUserExperience, updatePersonal } from '../../../config/redux/actions/userAction'
+import { addSkill, getUserSkill, deleteUserSkill, addExperience, deleteUserExp, getUserExperience, updatePersonal, addPortfolio, getUserPortfolio, delUserPorto } from '../../../config/redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/base/loading/Loading'
 import NavbarLP from '../../../components/module/navbarLP'
+// import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const EditProfJobseeker = () => {
 
@@ -20,6 +22,9 @@ const EditProfJobseeker = () => {
     const [userData, setUserData] = useState('')
     const [authToken, setAuthToken] = useState('')
     const [image, setImage] = useState('')
+    const [portoImgPreview, setPortoImgPreview] = useState('')
+    const [portoImg, setPortoImg] = useState('')
+    const [savePortoImg, setSavePortoImg] = useState('')
     const [saveImg, setSaveImg] = useState('')
     const target = useRef(null)
     const handleClickUpload = () => {
@@ -27,10 +32,22 @@ const EditProfJobseeker = () => {
         target.current.click()
     }
 
+    // Modal Bootstrap
+    const [show, setShow] = useState(false)
+
+    const handleClose = () => setShow(false)
+    const handleShow = (e) => {
+        e.preventDefault()
+        setShow(true)
+    }
+    // Modal Bootstrap end
+
     // State from redux
     const { isLoading, userSkill } = useSelector((state) => state.userSkill)
     const { detailUser } = useSelector((state) => state.userDetail)
-    console.log(detailUser)
+    const { userPortfolio } = useSelector((state) => state.userPortfolio)
+
+    console.log(userPortfolio)
 
     const { isLoading: isLoadingExp, userExperience } = useSelector((state) => state.userExperience)
 
@@ -48,6 +65,8 @@ const EditProfJobseeker = () => {
         description: ''
     })
 
+    const [portofolio, setPortofolio] = useState('')
+
     // Use Effect
     useEffect(() => {
         const dataFromLocal = JSON.parse(localStorage.getItem('PeworldUser'))
@@ -59,12 +78,8 @@ const EditProfJobseeker = () => {
     useEffect(() => {
         if (authToken) {
             dispatch(getUserSkill(authToken, navigate))
-        }
-    }, [authToken, dispatch, navigate])
-
-    useEffect(() => {
-        if (authToken) {
             dispatch(getUserExperience(authToken, navigate))
+            dispatch(getUserPortfolio(authToken, navigate))
         }
     }, [authToken, dispatch, navigate])
 
@@ -94,7 +109,7 @@ const EditProfJobseeker = () => {
         if (saveImg) {
             formData.append('photo', saveImg)
         }
-        
+
         if (Object.keys(personalData).length > 0) {
             const data = personalData
             Object.keys(personalData).forEach((item) => {
@@ -178,9 +193,75 @@ const EditProfJobseeker = () => {
     }
     // Experience handling End
 
-    console.log(personalData)
-    console.log(saveImg)
+    // Handle Portofolio
+    const handlePortoInput = (e) => {
+        e.persist()
+
+        if (e.target.files) {
+            const uploaded = e.target.files[0]
+            setPortoImgPreview(URL.createObjectURL(uploaded))
+            setSavePortoImg(uploaded)
+        }
+        setPortofolio({ ...portofolio, [e.target.name]: e.target.value })
+    }
+
+    const handleChangePortoImg = () => {
+        setPortoImgPreview('')
+        setSavePortoImg('')
+    }
+
+    const submitAddPorto = (e) => {
+        e.preventDefault()
+
+        let formData = new FormData()
+
+        if (savePortoImg) {
+            formData.append('appImage', savePortoImg)
+        }
+
+        if (Object.keys(portofolio).length > 0) {
+            const data = portofolio
+            Object.keys(portofolio).forEach((item) => {
+                formData.append(item, data[item])
+            })
+        }
+
+        dispatch(addPortfolio(formData, authToken, navigate))
+
+        // swal({
+        //     title: 'Success',
+        //     text: 'Berhasil tambah porto',
+        //     icon: 'success'
+        // })
+    }
+
+    const handlePortoDel = (e, id, name) => {
+        e.preventDefault()
+
+        swal({
+            title: "Are you sure?",
+            text: `${name} portfolio will be deleted`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((isOkay => {
+            if (isOkay) {
+                // console.log('delete experience success')
+                dispatch(delUserPorto(authToken, id, name))
+            }
+        }))
+
+        return false
+    }
+
+    // Handle Portofolio End
+
+    // console.log(personalData)
+    // console.log(saveImg)
     // console.log(userData)
+    console.log(portofolio)
+    console.log(portoImgPreview)
+    console.log(savePortoImg)
 
     return (
         <div className={`${styles['profile-jobseeker']}`}>
@@ -493,9 +574,62 @@ const EditProfJobseeker = () => {
                     <form className={`${styles['portfolio']}`}>
                         <h4>Portfolio</h4>
                         <hr />
+                        {userPortfolio.length > 0 && userPortfolio.map((porto, idx) => {
+                            return (
+                                <div key={idx} className={`${styles.porto_list}`}>
+                                    <p>{porto.app_name}</p>
+
+                                    <div>
+                                        <button
+                                            onClick={(e) => handleShow(e)}
+                                        >
+                                            <i className="fa-solid fa-eye"></i>
+                                        </button>
+                                        <button
+                                            onClick={(e) => handlePortoDel(e, porto.id, porto.app_name)}
+                                        >
+                                            <i className="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>{porto.app_name}</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <div className={`${styles.modal_img}`}>
+                                                <img src={porto.app_image} alt="" />
+                                            </div>
+                                            <table className={`${styles.porto_detail}`}>
+                                                <tr>
+                                                    <td>App Name</td>
+                                                    <td>: {porto.app_name}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>App Type</td>
+                                                    <td>: {porto.app_type}</td>
+                                                </tr>
+                                            </table>
+                                            <a
+                                                className={`${styles.porto_repo}`}
+                                                href={porto.link_repo}
+                                                target="_blank" rel="noopener noreferrer">Repository</a>
+                                        </Modal.Body>
+                                        {/* <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                Close
+                                            </Button>
+                                            <Button variant="primary" onClick={handleClose}>
+                                                Save Changes
+                                            </Button>
+                                        </Modal.Footer> */}
+                                    </Modal>
+                                </div>
+                            )
+                        })}
+                        {userPortfolio && <hr></hr>}
                         <div className={`${styles['form-experience']}`}>
                             <div className={`${styles['input-group']}`}>
-                                <label htmlFor="">Nama Aplikasi</label>
+                                <label htmlFor="appName">Nama Aplikasi</label>
                                 <Input
                                     placeholder={'Masukkan nama aplikasi'}
                                     style={{
@@ -504,48 +638,80 @@ const EditProfJobseeker = () => {
                                         border: '1px solid #9EA0A5',
                                         borderRadius: '5px'
                                     }}
+                                    id='appName'
+                                    name='appName'
+                                    onChange={handlePortoInput}
                                 />
                             </div>
                             {/* <div className={`${styles['double-input-group']}`}> */}
                             <div className={`${styles['input-group']}`}>
-                                <label htmlFor="">Link Repository</label>
+                                <label htmlFor="appType">App Type</label>
                                 <Input
-                                    placeholder={'PT Nocturnal'}
+                                    placeholder={'ex: mobile or web app'}
                                     style={{
                                         height: 40,
                                         paddingLeft: 15,
                                         border: '1px solid #9EA0A5',
                                         borderRadius: '5px'
                                     }}
+                                    id='appType'
+                                    name='appType'
+                                    onChange={handlePortoInput}
+                                />
+                            </div>
+                            <div className={`${styles['input-group']}`}>
+                                <label htmlFor="linkRepo">Link Repository</label>
+                                <Input
+                                    placeholder={'ex: https://github.com/blablabla'}
+                                    style={{
+                                        height: 40,
+                                        paddingLeft: 15,
+                                        border: '1px solid #9EA0A5',
+                                        borderRadius: '5px'
+                                    }}
+                                    id='linkRepo'
+                                    name='linkRepo'
+                                    onChange={handlePortoInput}
                                 />
                             </div>
                         </div>
                         <div className={`${styles['input-group']}`}>
-                            <div
-                                className={`${styles['drag-area']}`}
-                            // onDragOver={''}
-                            >
-                                <div className={`${styles.icon}`}><i className="fas fa-cloud-upload-alt"></i></div>
-                                <header>Drag & Drop untuk Upload Gambar Aplikasi Mobile</header>
-                                <p>Atau cari untuk mengupload file dari direktorimu.</p>
-                                <div className={`${styles['img-req']}`}>
-                                    <div className={`${styles['img-format']}`}>
-                                        <img src="/assets/img/icons/dummy-icon.png" alt=""
-                                        />
-                                        <p className={`${styles['format-text']}`}>High-Res Image PNG, JPG or GIF</p>
+                            {portoImgPreview ?
+                                <>
+                                    <div className={`${styles.prevPortoImg}`}>
+                                        <img src={portoImgPreview} alt="" />
                                     </div>
-                                    <div className={`${styles['img-size']}`}>
-                                        <img src="/assets/img/icons/expand.png" alt=""
-                                        />
-                                        <p
-                                            className={`${styles['size-text']}`}
-                                        >Size 1080x1920 or 600x800</p>
+                                    <p className={`${styles.change_photo}`}
+                                        onClick={handleChangePortoImg}
+                                    >Change Photo</p>
+                                </>
+                                :
+                                <div
+                                    className={`${styles['drag-area']}`}
+                                // onDragOver={''}
+                                >
+                                    <div className={`${styles.icon}`}><i className="fas fa-cloud-upload-alt"></i></div>
+                                    <header>Drag & Drop untuk Upload Gambar Aplikasi Mobile</header>
+                                    <p>Atau cari untuk mengupload file dari direktorimu.</p>
+                                    <div className={`${styles['img-req']}`}>
+                                        <div className={`${styles['img-format']}`}>
+                                            <img src="/assets/img/icons/dummy-icon.png" alt=""
+                                            />
+                                            <p className={`${styles['format-text']}`}>High-Res Image PNG, JPG or GIF</p>
+                                        </div>
+                                        <div className={`${styles['img-size']}`}>
+                                            <img src="/assets/img/icons/expand.png" alt=""
+                                            />
+                                            <p
+                                                className={`${styles['size-text']}`}
+                                            >Size 1080x1920 or 600x800</p>
+                                        </div>
                                     </div>
+                                    {/* <span>OR</span> */}
+                                    <label htmlFor='appImage'>Browse File</label>
+                                    <input type="file" id='appImage' name='appImage' onChange={handlePortoInput} hidden />
                                 </div>
-                                {/* <span>OR</span> */}
-                                <button>Browse File</button>
-                                <input type="file" hidden />
-                            </div>
+                            }
                         </div>
                         {/* </div> */}
                         <hr />
@@ -564,6 +730,7 @@ const EditProfJobseeker = () => {
                                 // marginTop: '20px',
                                 padding: 10
                             }}
+                            onClick={submitAddPorto}
                         />
                     </form>
                 </div>
