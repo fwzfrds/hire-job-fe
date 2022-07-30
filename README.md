@@ -99,15 +99,15 @@ Contributions are what make the open source community such an amazing place to b
 | ------------- | ------------- |
 | ![Login](/public/assets/img/screenshot/login.png?raw=true "Login Page") | ![Register](/public/assets/img/screenshot/register.png?raw=true "Register Page")|
 
-| Landing Page  | Product Detail Page |
+| Landing Page  | Jobseeker Detail Page |
 | ------------- | ------------- |
 | ![Landing](/public/assets/img/screenshot/landing-page.png?raw=true "Landing Page") | ![Jobseeker Detail](/public/assets/img/screenshot/jobseeker-detail.png?raw=true "Jobseeker Detail Page") |
 
-| Profile Page | Add Product Page |
+| Profile Page | Offering Page |
 | ------------- | ------------- |
 | ![Profile](/public/assets/img/screenshot/profile.png?raw=true "Profile Page") | ![Offering](/public/assets/img/screenshot/offering.png?raw=true "Offering Page") |
 
-| Cart Page | Checkout Page |
+| Home Recruiter Page | Hiring Page |
 | ------------- | ------------- |
 | ![Home Recruiter](/public/assets/img/screenshot/recruiter-home.png?raw=true "Recruiter Home Page") | ![Hire](/public/assets/img/screenshot/hire.png?raw=true "Hiring Page") |
 
