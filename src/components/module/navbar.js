@@ -58,7 +58,7 @@ const Navbar = ({ userData }) => {
             text: `Log Out Success`,
             icon: "success"
           })
-          navigate('/login-admin')
+          navigate('/recruiter/login')
         }
       }, [isLogout, navigate])
 
