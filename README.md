@@ -35,7 +35,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Hire Job | Peworld is a website that provides talents in IT for companies who are looking for them. Created by Nocturnal team. Built with React JS, Express JS, Postgre SQL, Nodemailer as as module for sending email, and Cloudinary as cloud services for uploading images.
+Hire Job | Peworld is a website that provides talents in IT for companies who are looking for them. Created by Nocturnal team. Built with React JS, Express JS, Postgre SQL, Nodemailer as module for sending email, and Cloudinary as cloud services for uploading images.
 This Application use Rest API server from [hirejob-api](https://hire-job-server.herokuapp.com)
 
 ### Built With
