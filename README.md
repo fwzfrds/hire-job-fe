@@ -114,7 +114,7 @@ Contributions are what make the open source community such an amazing place to b
 
 <!-- RELATED PROJECT -->
 ## Related Project
-* [`Hire Job Web Demo`](https://hirejob-fe.vercel.app/)
+* [`Hire Job Web Demo`](https://hirejob-fe-fwzfrds.vercel.app/)
 * [`Hire JOb Rest API URL`](https://hire-job-server.herokuapp.com)
 * [`Hire Job Rest API Repository`](https://github.com/zeronerocode/HireJobServer)
 
